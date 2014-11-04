@@ -10,6 +10,13 @@
 #  updated_at :datetime
 #
 
-class ProductPrice < ActiveRecord::Base
-  # Type stuff here
+FactoryGirl.define do
+  factory :product_price do
+    price { generate(:p_val) }
+    active false
+  end
+
+  sequence :p_val do |v|
+    v.to_i + 300 + rand(300).to_i
+  end
 end

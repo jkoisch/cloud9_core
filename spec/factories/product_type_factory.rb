@@ -12,17 +12,9 @@
 #  updated_at             :datetime
 #
 
-class ProductType < ActiveRecord::Base
-  include Concerns::Invoiceable
-
-  has_many :products
-  validates_presence_of :name, :description
-
-  after_create :defaults
-
-  def defaults
-    default_invoice_names
+FactoryGirl.define do
+  factory :product_type do
+    name "product_type_1"
+    description "product_type_1 description"
   end
-
-
 end

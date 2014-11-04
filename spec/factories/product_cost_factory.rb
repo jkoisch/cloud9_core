@@ -10,6 +10,13 @@
 #  updated_at :datetime
 #
 
-class ProductCost < ActiveRecord::Base
-  belongs_to :product
+FactoryGirl.define do
+  factory :product_cost do
+    cost { generate(:val) }
+    active false
+  end
+
+  sequence :val do |v|
+    v.to_i + rand(300).to_i
+  end
 end

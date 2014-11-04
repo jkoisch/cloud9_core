@@ -12,15 +12,9 @@
 #  updated_at          :datetime
 #
 
-class ProductGroup < ActiveRecord::Base
-  include Concerns::Invoiceable
-
-  has_many :requirements, as: :requireable
-  has_and_belongs_to_many :products
-
-  after_create :defaults
-
-  def defaults
-    default_invoice_names
+FactoryGirl.define do
+  factory :product_group do
+    name "product_group_1"
+    description "product_group_1 description"
   end
 end

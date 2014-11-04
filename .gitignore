@@ -20,3 +20,9 @@
 .idea
 
 /config/database.yml
+
+doc
+
+.yardoc
+
+Guardfile

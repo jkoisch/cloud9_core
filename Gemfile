@@ -26,9 +26,11 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'wuparty'
 gem 'yard'
+gem 'annotate'
 
 gem 'rspec-rails', '~>3.0.0' ,:group => [:test, :development]
 group :test do
+  gem "factory_girl_rails", "~> 4.0"
   gem 'guard-rspec', '~> 4.2.10'
   gem 'email_spec'
   gem 'database_cleaner'

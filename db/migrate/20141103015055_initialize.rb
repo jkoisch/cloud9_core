@@ -32,9 +32,9 @@ class Initialize < ActiveRecord::Migration
       t.timestamps
     end
 
-    create_table :products_groups, id: false do |t|
-      t.belongs_to :product_groups
-      t.belongs_to :products
+    create_table :product_groups_products, id: false do |t|
+      t.belongs_to :product_group
+      t.belongs_to :product
     end
 
     create_table :product_costs do |t|

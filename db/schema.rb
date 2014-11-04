@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141103224357) do
+ActiveRecord::Schema.define(version: 20141104220704) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "orders", force: true do |t|
+    t.text     "notes"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "orders_products", force: true do |t|
+    t.integer "product_id"
+    t.integer "order_id"
+  end
 
   create_table "product_costs", force: true do |t|
     t.integer  "product_id"
@@ -32,6 +43,11 @@ ActiveRecord::Schema.define(version: 20141103224357) do
     t.boolean  "active"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "product_groups_products", id: false, force: true do |t|
+    t.integer "product_group_id"
+    t.integer "product_id"
   end
 
   create_table "product_licenses", force: true do |t|
@@ -69,11 +85,6 @@ ActiveRecord::Schema.define(version: 20141103224357) do
     t.boolean  "active"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "products_groups", id: false, force: true do |t|
-    t.integer "product_groups_id"
-    t.integer "products_id"
   end
 
   create_table "requirements", force: true do |t|
