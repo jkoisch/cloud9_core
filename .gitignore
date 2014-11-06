@@ -26,3 +26,6 @@ doc
 .yardoc
 
 Guardfile
+
+# Ignore application configuration
+/config/application.yml

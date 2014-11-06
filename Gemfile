@@ -27,6 +27,8 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'wuparty'
 gem 'yard'
 gem 'annotate'
+gem 'restforce'
+gem 'figaro'
 
 gem 'rspec-rails', '~>3.0.0' ,:group => [:test, :development]
 group :test do

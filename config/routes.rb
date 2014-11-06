@@ -53,5 +53,15 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+
+
+  resources :salesforce do
+    collection do
+      get 'salesforce_callback'
+    end
+  end
+
+
   root :to => 'dashboard#index'
 end
