@@ -12,7 +12,10 @@ class AddCustomerAndUser < ActiveRecord::Migration
     end
 
     create_table :users do |t|
+      t.text :email
+      t.boolean :admin
 
+      t.timestamps
     end
 
   end
