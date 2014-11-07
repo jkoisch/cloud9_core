@@ -21,9 +21,18 @@ module Salesforce
       @data
     end
 
+    def method_missing(m, *args)
+      begin
+        salesforce_data.send(m)
+      rescue
+        super
+      end
+    end
+
     private
       @data
       @client
+
       def data
         @data
       end
@@ -35,6 +44,5 @@ module Salesforce
       def set_client
         @client ||= Salesforce::ForceClient.new
       end
-
   end
 end

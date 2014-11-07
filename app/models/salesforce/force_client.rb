@@ -27,7 +27,12 @@ module Salesforce
 
       def method_missing(m, *args)
 
-        @client.find(m.to_s,args[0])
+        begin
+          @client.find(m.to_s, args[0])
+        rescue
+          super
+        end
+
 
       end
 
