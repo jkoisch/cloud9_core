@@ -19,7 +19,7 @@ module Salesforce
         self.security_token = ENV['salesforce_token']
 
         if self.client.blank?
-          @client = Restforce.new :username => self.username,
+          self.client = Restforce.new :username => self.username,
                                       :password => self.password,
                                       :security_token => self.security_token
         end
@@ -32,7 +32,6 @@ module Salesforce
         rescue
           super
         end
-
 
       end
 

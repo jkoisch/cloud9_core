@@ -1,5 +1,6 @@
 module Salesforce
-  class Opportunity < Salesforce::Base
+  class Case < Salesforce::Base
+
     include ActiveModel::Model
 
     attr_accessor :id
@@ -7,8 +8,7 @@ module Salesforce
     define_model_callbacks :initialize, only: [:after]
 
     def salesforce_data
-      @data ||= @client.opportunity(self.id.to_s)
-      @data
+      @data ||= @client.case(self.id.to_s)
     end
 
   end
