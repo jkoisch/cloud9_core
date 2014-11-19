@@ -13,16 +13,19 @@
 #  updated_at          :datetime
 #
 
-class  Product < ActiveRecord::Base
+class  Cloud9::Product < ActiveRecord::Base
   include Concerns::Invoiceable
 
   has_many :requirements, as: :requireable
   has_many :product_licenses
-  has_many :product_costs
-  has_many :product_prices
+  has_many :product_costs, :dependent => :destroy
+  has_many :product_prices, :dependent => :destroy
   belongs_to :product_type
   has_and_belongs_to_many :product_groups
   has_and_belongs_to_many :orders
+
+  accepts_nested_attributes_for :product_costs
+  accepts_nested_attributes_for :product_prices
 
   validates_presence_of :name, :description
 

@@ -54,6 +54,11 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
 
+  namespace :api do
+    namespace :v1 do
+      resources :products
+    end
+  end
 
 
   resources :salesforce do
@@ -62,6 +67,9 @@ Rails.application.routes.draw do
     end
   end
 
+  get "dashboard/index"
 
-  root :to => 'dashboard#index'
+  #root :to => 'dashboard#index'
+  root to: 'home#index'
+  get '*path', to: 'home#index'
 end

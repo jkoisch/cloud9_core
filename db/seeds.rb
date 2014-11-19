@@ -48,6 +48,4 @@ prod1 = Product.create(
     description: "Entitles one user access to Cloud9 resources"
 )
 
-Pr
-
 

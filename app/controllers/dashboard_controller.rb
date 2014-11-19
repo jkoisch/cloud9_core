@@ -1,7 +1,8 @@
 class DashboardController < ApplicationController
 
   def index
-    render :json =>  {:greeting => 'Hello'}
+    # render
+    # render :json =>  {:greeting => 'Hello'}
   end
 
 end

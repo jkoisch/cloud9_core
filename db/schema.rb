@@ -11,15 +11,54 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141104220704) do
+ActiveRecord::Schema.define(version: 20141105180953) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "customers", force: true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "organization_name"
+    t.string   "role"
+    t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "invoice_groups", force: true do |t|
+    t.integer  "total"
+    t.integer  "invoice_id"
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "invoice_lines", force: true do |t|
+    t.integer "invoice_group_id"
+    t.integer "line_total"
+    t.integer "count"
+    t.string  "name"
+    t.text    "description"
+  end
+
+  create_table "invoices", force: true do |t|
+    t.integer  "state"
+    t.integer  "customer_id"
+    t.integer  "total"
+    t.datetime "fail_date"
+    t.datetime "pay_date"
+    t.datetime "bill_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "orders", force: true do |t|
     t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "invoice_id"
   end
 
   create_table "orders_products", force: true do |t|
@@ -92,6 +131,13 @@ ActiveRecord::Schema.define(version: 20141104220704) do
     t.string   "requireable_type"
     t.text     "requirement_rule"
     t.boolean  "active"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users", force: true do |t|
+    t.text     "email"
+    t.boolean  "admin"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

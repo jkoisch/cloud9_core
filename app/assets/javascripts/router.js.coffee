@@ -1,0 +1,12 @@
+Cloud9Core.Router.reopen
+  rootURL: '/'
+  location: 'auto'
+
+Cloud9Core.Router.map ->
+#  @resource 'opportunity', path: '/opportunities/:id', ->
+#    @route 'edit'
+  @resource 'opportunities'
+  @resource 'customers'
+  @resource 'products', path: '/products', ->
+    @resource 'product', path: '/:id'
+  @route 'about'

@@ -1,0 +1,10 @@
+article#product
+  h1= model.name
+
+  p
+    ' Description:
+    model.description
+
+  p
+    ' Id:
+    model.id

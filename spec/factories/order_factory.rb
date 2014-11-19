@@ -6,6 +6,7 @@
 #  notes      :text
 #  created_at :datetime
 #  updated_at :datetime
+#  invoice_id :integer
 #
 
 FactoryGirl.define do
