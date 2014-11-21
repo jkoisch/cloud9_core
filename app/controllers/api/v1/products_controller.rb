@@ -2,11 +2,11 @@ class Api::V1::ProductsController < ApplicationController
   respond_to :json
 
   def index
-    render json: Cloud9::Product.includes(:product_costs).all
+    render json: Cloud9::Product.all
   end
 
   def show
-    respond_with product
+    render json: product
   end
 
   def create

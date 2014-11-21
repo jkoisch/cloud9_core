@@ -7,6 +7,7 @@ namespace :db do
   task populate: :environment do
 
     Cloud9::Product.destroy_all
+    Cloud9::Cost.destroy_all
 
     20.times do
       p = Cloud9::Product.create(
@@ -15,11 +16,21 @@ namespace :db do
         active: true
       )
 
-      c = ProductCost.create(
-          cost: Faker::Address.building_number,
+      c = Cloud9::Cost.create(
+          amount: Faker::Address.building_number,
           product_id: p.id,
           active: true
       )
+    end
+
+    #Generate some non active costs
+    Cloud9::Product.all.each do |p|
+      c = Cloud9::Cost.create(
+          amount: Faker::Address.building_number,
+          product_id: p.id,
+          active: false
+      )
+      p c
     end
 
   end

@@ -1,11 +1,24 @@
 article#products
-  h1 Cloud9 Products
-  table
-    tr
-      td
-        ul
-          each product in controller
-            link-to 'product' product tagName="li"
-              product.name
-      td
-        outlet
+  .col-xs-2
+      table
+        tr
+          th
+            h1 Cloud9 Products
+        tr
+          td
+            ul
+              each product in controller
+                link-to 'product' product tagName="li"
+                  product.name
+  .col-xs-1
+  .col-xs-2
+      table
+        tr
+          th
+            h1 Details
+        tr
+          td
+            outlet details
+  .col-xs-1
+  .col-xs-2
+      outlet sub-details

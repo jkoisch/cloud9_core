@@ -1,0 +1,24 @@
+
+h3 Current Cost
+h4
+  =model.formattedCost
+
+h4 History
+each z in model.costs
+    table
+      tr
+        td
+          ' Id
+          z.id
+      tr
+        td
+          ' Amount
+          z.formattedCost
+      tr
+        td
+          ' Active?
+          z.active
+      tr
+        td
+          ' Active Date
+          z.activeDate

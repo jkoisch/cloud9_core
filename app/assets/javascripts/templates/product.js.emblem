@@ -2,9 +2,17 @@ article#product
   h1= model.name
 
   p
-    ' Description:
-    model.description
-
-  p
     ' Id:
     model.id
+
+  p
+    label Description:
+    view Ember.TextArea value=model.description
+
+  p
+    label Cost:
+    link-to 'costs' tagName="h6"
+      model.formattedCost
+
+  p
+    input type='submit' value='Save Changes' click='saveChanges'
