@@ -12,8 +12,10 @@
 #  updated_at             :datetime
 #
 
+ns = Cloud9::ProductType
+
 FactoryGirl.define do
-  factory :product_type do
+  factory :product_type, :class => ns do
     name "product_type_1"
     description "product_type_1 description"
   end

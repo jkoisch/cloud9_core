@@ -9,7 +9,7 @@
 #  invoice_id :integer
 #
 
-class Order < ActiveRecord::Base
+class Cloud9::Order < ActiveRecord::Base
 
   has_and_belongs_to_many :products
   belongs_to :invoice

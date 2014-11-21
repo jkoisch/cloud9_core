@@ -12,7 +12,7 @@
 #  updated_at             :datetime
 #
 
-class ProductType < ActiveRecord::Base
+class Cloud9::ProductType < ActiveRecord::Base
   include Concerns::Invoiceable
 
   has_many :products

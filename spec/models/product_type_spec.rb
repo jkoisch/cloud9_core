@@ -14,7 +14,7 @@
 
 require 'rails_helper'
 
-RSpec.describe ProductType, :type => :model do
+RSpec.describe Cloud9::ProductType, :type => :model do
   it "has a name and description" do
     pt = build(:product_type)
 

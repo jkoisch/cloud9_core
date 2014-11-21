@@ -9,8 +9,10 @@
 #  invoice_id :integer
 #
 
+ns = Cloud9::Order
+
 FactoryGirl.define do
-  factory :order do
+  factory :order, :class => ns do
     notes "Simple notes on this order"
   end
 end

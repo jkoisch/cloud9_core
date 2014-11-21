@@ -12,7 +12,7 @@
 #  updated_at          :datetime
 #
 
-class ProductGroup < ActiveRecord::Base
+class Cloud9::ProductGroup < ActiveRecord::Base
   include Concerns::Invoiceable
 
   has_many :requirements, as: :requireable

@@ -18,14 +18,14 @@ class  Cloud9::Product < ActiveRecord::Base
 
   has_many :requirements, as: :requireable
   has_many :product_licenses
-  has_many :costs, :dependent => :destroy
-  has_many :product_prices, :dependent => :destroy
+  has_many :cost_history, :class => Cloud9::Cost, :dependent => :destroy
+  has_many :price_history, :class => Cloud9::Price, :dependent => :destroy
   belongs_to :product_type
   has_and_belongs_to_many :product_groups
   has_and_belongs_to_many :orders
 
-  accepts_nested_attributes_for :costs
-  accepts_nested_attributes_for :product_prices
+  accepts_nested_attributes_for :cost_history
+  accepts_nested_attributes_for :price_history
 
   validates_presence_of :name, :description
 
@@ -37,9 +37,9 @@ class  Cloud9::Product < ActiveRecord::Base
 
   # Determines the active cost for this product
   def active_cost
-    if self.costs.length > 0
-      i = self.costs.find_index { |f| (f.active == true)}
-      self.costs[i].amount
+    if self.cost_history.length > 0
+      i = self.cost_history.find_index { |f| (f.active == true)}
+      self.cost_history[i].amount
     else
       0
     end
@@ -47,9 +47,9 @@ class  Cloud9::Product < ActiveRecord::Base
 
   # Determines the active price for this product
   def active_price
-    if self.product_prices.length > 0
-      i = self.product_prices.find_index { |f| (f.active == true)}
-      self.product_prices[i].price
+    if self.price_history.length > 0
+      i = self.price_history.find_index { |f| (f.active == true)}
+      self.price_history[i].amount
     else
       0
     end
@@ -57,7 +57,7 @@ class  Cloud9::Product < ActiveRecord::Base
 
   # A simple view of the margin provided by this product
   def margin
-    price - cost
+    active_price - active_cost
   end
 
 end

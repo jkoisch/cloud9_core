@@ -15,7 +15,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Product, :type => :model do
+RSpec.describe Cloud9::Product, :type => :model do
   it "has a name and description" do
     prod = build(:product)
 
@@ -44,17 +44,17 @@ RSpec.describe Product, :type => :model do
   it "can represent a well formed product within our catalog" do
     pt = create(:product_type)
     prod = create(:product_category, product_type_id: pt.id )
-    costs = create_list(:product_cost, 4)
+    costs = create_list(:cost, 4)
     costs[3].active = true
-    prices = build_list(:product_price, 4)
+    prices = build_list(:price, 4)
     prices[3].active = true
-    prod.product_costs = costs
-    prod.product_prices = prices
+    prod.cost_history = costs
+    prod.price_history = prices
 
-    expect(prod.product_costs.length).to be(4)
-    expect(prod.product_prices.length).to be(4)
-    expect(prod.cost).to be > -1
-    expect(prod.price).to be > -1
+    expect(prod.cost_history.length).to be(4)
+    expect(prod.price_history.length).to be(4)
+    expect(prod.active_cost).to be > -1
+    expect(prod.active_price).to be > -1
     expect(prod.margin).to be > 0
   end
 end

@@ -10,6 +10,6 @@
 #  updated_at :datetime
 #
 
-class ProductPrice < ActiveRecord::Base
+class Cloud9::Price < ActiveRecord::Base
   # Type stuff here
 end

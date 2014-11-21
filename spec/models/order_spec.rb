@@ -11,7 +11,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Order, :type => :model do
+RSpec.describe Cloud9::Order, :type => :model do
 
   it "has notes attached to it" do
     ord = build(:order)

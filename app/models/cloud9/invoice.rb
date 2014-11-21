@@ -13,7 +13,7 @@
 #  updated_at  :datetime
 #
 
-class Invoice < ActiveRecord::Base
+class Cloud9::Invoice < ActiveRecord::Base
 
   has_many :orders
   has_many :invoice_groups

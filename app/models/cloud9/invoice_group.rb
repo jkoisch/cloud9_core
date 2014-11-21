@@ -11,7 +11,7 @@
 #  updated_at  :datetime
 #
 
-class InvoiceGroup < ActiveRecord::Base
+class Cloud9::InvoiceGroup < ActiveRecord::Base
 
   belongs_to :invoice
   has_many :invoice_groups

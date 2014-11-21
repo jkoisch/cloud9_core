@@ -10,7 +10,7 @@
 #  description      :text
 #
 
-class InvoiceLine < ActiveRecord::Base
+class Cloud9::InvoiceLine < ActiveRecord::Base
 
   belongs_to :invoice_group
 

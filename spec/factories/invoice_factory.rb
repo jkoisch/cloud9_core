@@ -13,9 +13,11 @@
 #  updated_at  :datetime
 #
 
+ns = Cloud9::Invoice
+
 FactoryGirl.define do
 
-  factory :invoice do
+  factory :invoice, :class => ns do
 
   end
 

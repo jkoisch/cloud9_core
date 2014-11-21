@@ -12,8 +12,10 @@
 #  updated_at          :datetime
 #
 
+ns = Cloud9::ProductGroup
+
 FactoryGirl.define do
-  factory :product_group do
+  factory :product_group, :class => ns do
     name "product_group_1"
     description "product_group_1 description"
   end

@@ -15,7 +15,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Invoice, :type => :model do
+RSpec.describe Cloud9::Invoice, :type => :model do
 
   it "has customer information available" do
 
