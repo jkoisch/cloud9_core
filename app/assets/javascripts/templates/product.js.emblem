@@ -1,4 +1,14 @@
 article#product
+
+  if showUnsavedMessage
+    .alert.alert-danger
+      Ember.View %span.glyphicon.glyphicon-exclamation-sign
+      .text-danger There are Unsaved Changes
+  if isSaving
+    .alert.alert-success
+      Ember.View %span.glyphicon.glyphicon-star
+      .text-success Saving...
+
   h1= model.name
 
   p
@@ -10,9 +20,24 @@ article#product
     view Ember.TextArea value=model.description
 
   p
-    label Cost:
-    link-to 'costs' tagName="h6"
-      model.formattedCost
+    table.table-bordered
+      tr
+        td
+          label Cost:
+          link-to 'costs' tagName="h6"
+            model.formattedCost
+        td
+          label Price:
+          link-to 'costs' tagName="h6"
+            model.formattedCost
+
+  p
+    label Status:
+    view Ember.Select content=Cloud9Core.Product.STATUSES value=model.status
+
+  p
+    label Notes:
+    view Ember.TextArea value=model.notes
 
   p
     input type='submit' value='Save Changes' click='saveChanges'

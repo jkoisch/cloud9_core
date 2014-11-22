@@ -11,7 +11,7 @@ article#products
                 link-to 'product' product tagName="li"
                   product.name
   .col-xs-1
-  .col-xs-2
+  .col-xs-3
       table
         tr
           th
@@ -21,4 +21,9 @@ article#products
             outlet details
   .col-xs-1
   .col-xs-2
-      outlet sub-details
+      table
+        outlet sub-details
+  .col-xs-1
+  .col-xs-2
+      table
+        outlet edit-details

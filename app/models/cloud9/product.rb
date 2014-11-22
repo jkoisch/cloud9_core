@@ -20,6 +20,7 @@ class  Cloud9::Product < ActiveRecord::Base
   has_many :product_licenses
   has_many :cost_history, :class => Cloud9::Cost, :dependent => :destroy
   has_many :price_history, :class => Cloud9::Price, :dependent => :destroy
+  has_many :costs, :class => Cloud9::Cost, :dependent => :destroy
   belongs_to :product_type
   has_and_belongs_to_many :product_groups
   has_and_belongs_to_many :orders

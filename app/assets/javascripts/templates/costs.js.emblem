@@ -1,24 +1,35 @@
 
-h3 Current Cost
-h4
-  =model.formattedCost
-
-h4 History
-each z in model.costs
-    table
-      tr
-        td
-          ' Id
-          z.id
-      tr
-        td
-          ' Amount
-          z.formattedCost
-      tr
-        td
-          ' Active?
-          z.active
-      tr
-        td
-          ' Active Date
-          z.activeDate
+tr
+  td
+    h3 Active Cost
+tr
+  td
+    h4
+      =model.formattedCost
+tr
+  td
+    h4 History
+tr
+  td
+    each z in model.costs
+      fieldset
+        table.table-responsive.table-condensed.table-bordered
+          if z.isActive
+            tr.success
+              td.success
+                .alert.alert-success
+                  h5.success
+                    z.formattedCost
+            tr
+              td.small
+                  ' Active Date:
+                  z.activeDate
+          else
+            tr.warning
+              td.small
+                link-to 'costs.edit' z
+                  z.formattedCost
+            tr
+              td.small
+                ' Active Date:
+                z.activeDate

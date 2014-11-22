@@ -3,6 +3,9 @@ Cloud9Core.Cost = DS.Model.extend
   active:         DS.attr 'boolean'
   activeDate:     DS.attr 'date'
 
+  isActive: (->
+    return @get('active')
+  ).property('active')
 
   formattedCost: (->
     pc = @get('amount')/100
