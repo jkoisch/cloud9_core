@@ -11,5 +11,9 @@
 #
 
 class Cloud9::Price < ActiveRecord::Base
-  # Type stuff here
+  belongs_to :product
+
+  def active_date
+    self.updated_at
+  end
 end

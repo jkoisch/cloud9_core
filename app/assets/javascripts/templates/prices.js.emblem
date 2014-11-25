@@ -1,14 +1,14 @@
-article#costs
-    h3 Active Cost
+article#prices
+    h3 Active Price
     h4
-      =model.formattedCost
+      =model.formattedPrice
     h4 History
     h6
-      link-to 'costs.new' | Update Cost
+      link-to 'prices.new' | Update Price
     fieldset
     outlet
     dl
-      each z in model.costs
+      each z in model.prices
         if z.isActive
           .alert.alert-success
             dt

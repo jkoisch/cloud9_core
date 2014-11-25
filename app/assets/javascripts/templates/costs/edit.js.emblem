@@ -1,3 +1,5 @@
-article#cost
-  h1
-    Hi There
+h6 Make this cost active?
+input type='submit' value=Activate click='makeCostActive'
+
+
+

@@ -21,6 +21,7 @@ class  Cloud9::Product < ActiveRecord::Base
   has_many :cost_history, :class => Cloud9::Cost, :dependent => :destroy
   has_many :price_history, :class => Cloud9::Price, :dependent => :destroy
   has_many :costs, :class => Cloud9::Cost, :dependent => :destroy
+  has_many :prices, :class => Cloud9::Price, :dependent => :destroy
   belongs_to :product_type
   has_and_belongs_to_many :product_groups
   has_and_belongs_to_many :orders
@@ -59,6 +60,30 @@ class  Cloud9::Product < ActiveRecord::Base
   # A simple view of the margin provided by this product
   def margin
     active_price - active_cost
+  end
+
+  def activate_cost(cost)
+    #set each of the costs
+    self.costs.each do |c|
+      c.active = false
+      c.save
+    end
+
+    cost.active = true
+    cost.save
+    cost
+  end
+
+  def activate_price(price)
+    #set each of the prices
+    self.prices.each do |p|
+      p.active = false
+      p.save
+    end
+
+    price.active = true
+    price.save
+    price
   end
 
 end

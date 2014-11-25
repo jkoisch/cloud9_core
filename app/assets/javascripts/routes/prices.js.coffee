@@ -1,6 +1,6 @@
 # app/assets/javascripts/routes/lead.js.coffee
-Cloud9Core.CostsRoute = Ember.Route.extend
+Cloud9Core.PricesRoute = Ember.Route.extend
   renderTemplate: ->
-    @render "costs",
+    @render "prices",
       into: "products"
       outlet: "sub-details"

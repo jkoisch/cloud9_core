@@ -38,6 +38,10 @@ group :development do
   gem 'binding_of_caller'
 end
 
+group :production, :staging do
+  gem "passenger"
+end
+
 gem 'haml-rails'
 gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'

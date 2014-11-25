@@ -7,8 +7,12 @@ Cloud9Core.Router.map ->
 #    @route 'edit'
   @resource 'opportunities'
   @resource 'customers'
+  @resource 'groups'
   @resource 'products', path: '/products', ->
     @resource 'product', path: '/:id', ->
+      @route 'edit', path: 'edit'
       @resource 'costs', path: '/costs', ->
-        @route 'edit', path: '/:cost_id'
+        @route 'new', path: '/new'
+      @resource 'prices', path: '/prices', ->
+        @route 'new', path: '/new'
   @route 'about'

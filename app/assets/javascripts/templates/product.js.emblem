@@ -9,27 +9,33 @@ article#product
       Ember.View %span.glyphicon.glyphicon-star
       .text-success Saving...
 
-  h1= model.name
+
+  h1
+    model.name
 
   p
     ' Id:
-    model.id
+    link-to 'product.edit' model
+      model.id
 
   p
-    label Description:
-    view Ember.TextArea value=model.description
+    strong Description :
+    br
+    model.description
 
   p
-    table.table-bordered
+    table.table-responsive.table-condensed.table-bordered width="100%"
       tr
         td
-          label Cost:
-          link-to 'costs' tagName="h6"
-            model.formattedCost
+          .alert.alert-success
+            label Cost:
+            link-to 'costs' tagName="h6"
+              model.formattedCost
         td
-          label Price:
-          link-to 'costs' tagName="h6"
-            model.formattedCost
+          .alert.alert-success
+            label Price:
+            link-to 'prices' tagName="h6"
+              model.formattedPrice
 
   p
     label Status:
@@ -40,4 +46,5 @@ article#product
     view Ember.TextArea value=model.notes
 
   p
-    input type='submit' value='Save Changes' click='saveChanges'
+    if showUnsavedMessage
+      input type='submit' value='Save Changes' click='saveChanges'

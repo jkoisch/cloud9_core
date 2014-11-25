@@ -12,18 +12,10 @@ article#products
                   product.name
   .col-xs-1
   .col-xs-3
-      table
-        tr
-          th
-            h1 Details
-        tr
-          td
-            outlet details
+    outlet details
   .col-xs-1
   .col-xs-2
-      table
-        outlet sub-details
+    outlet sub-details
   .col-xs-1
   .col-xs-2
-      table
-        outlet edit-details
+    outlet edit-details

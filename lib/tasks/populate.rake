@@ -31,6 +31,12 @@ namespace :db do
           product_id: p.id,
           active: false
       )
+
+      pr = Cloud9::Price.create(
+          amount: c.amount*2,
+          product_id: p.id,
+          active: true
+      )
     end
 
     Cloud9::Product.take(5).each do |p|

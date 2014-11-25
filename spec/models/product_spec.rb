@@ -44,7 +44,7 @@ RSpec.describe Cloud9::Product, :type => :model do
   it "can represent a well formed product within our catalog" do
     pt = create(:product_type)
     prod = create(:product_category, product_type_id: pt.id )
-    costs = create_list(:cost, 4)
+    costs = create_list(:costs, 4)
     costs[3].active = true
     prices = build_list(:price, 4)
     prices[3].active = true

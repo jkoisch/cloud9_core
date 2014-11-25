@@ -1,0 +1,29 @@
+article#product
+
+h1
+  model.name
+
+if showUnsavedEditMessage
+    .alert.alert-danger
+      Ember.View %span.glyphicon.glyphicon-exclamation-sign
+      .text-danger There are Unsaved Changes
+if isSaving
+    .alert.alert-success
+      Ember.View %span.glyphicon.glyphicon-star
+      .text-success Saving...
+fieldset
+  dl
+    dt: label Name:
+    dd: view Ember.TextField value=model.name
+  dl
+    dt: label Invoice Name:
+    dd: view Ember.TextField value=model.invoiceName
+  dl
+    dt: label Description
+    dd: view Ember.TextArea value=model.description
+  dl
+    dt: label Invoice Description
+    dd: view Ember.TextArea value=model.invoiceDescription
+
+  dl
+    input type='submit' value='Save Product Details' click='saveProduct'

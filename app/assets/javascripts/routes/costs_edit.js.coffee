@@ -1,7 +1,8 @@
-Cloud9Core.CostsEditRouter = Ember.Router.extend(
+Cloud9Core.CostsEditRoute = Ember.Route.extend(
+  model: ->
+    return @modelFor('costs')
   renderTemplate: ->
     @render "costs.edit",
-      into: 'products'
+      into: "costs"
       outlet: "edit-details"
-
 )

@@ -1,0 +1,9 @@
+article#price
+
+fieldset
+  dl
+    dt: label Amount:
+    dd: view Ember.TextField value=fields.amount
+
+  dl
+    input type='submit' value='Save Price' click='savePrice'

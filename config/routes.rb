@@ -58,10 +58,12 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :products do
         resources :costs, shallow: true
+        resources :prices, shallow: true
       end
+      resources :costs
+      resources :prices
     end
   end
-
 
   resources :salesforce do
     collection do

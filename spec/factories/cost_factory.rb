@@ -13,7 +13,7 @@
 ns = Cloud9::Cost
 
 FactoryGirl.define do
-  factory :cost, :class => ns do
+  factory :costs, :class => ns do
     amount { generate(:val) }
     active false
   end
