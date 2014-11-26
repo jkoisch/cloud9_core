@@ -11,7 +11,7 @@
 
 class Cloud9::Order < ActiveRecord::Base
 
-  has_and_belongs_to_many :products
-  belongs_to :invoice
+  has_and_belongs_to_many :cloud9_components, :class_name => 'Cloud9::Component'
+  belongs_to :cloud9_invoice, :class_name => 'Cloud9::Invoice'
 
 end

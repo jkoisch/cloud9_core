@@ -11,10 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141122001353) do
+ActiveRecord::Schema.define(version: 20141126012539) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "components", force: true do |t|
+    t.integer  "product_id"
+    t.text     "notes"
+    t.integer  "system_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "active"
+  end
+
+  create_table "components_orders", id: false, force: true do |t|
+    t.integer "component_id"
+    t.integer "order_id"
+  end
 
   create_table "costs", force: true do |t|
     t.integer  "product_id"
@@ -69,25 +83,12 @@ ActiveRecord::Schema.define(version: 20141122001353) do
     t.integer  "invoice_id"
   end
 
-  create_table "orders_products", force: true do |t|
-    t.integer "product_id"
-    t.integer "order_id"
-  end
-
   create_table "prices", force: true do |t|
     t.integer  "product_id"
     t.boolean  "active"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "amount"
-  end
-
-  create_table "product_costs", force: true do |t|
-    t.integer  "product_id"
-    t.integer  "cost"
-    t.boolean  "active"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "product_groups", force: true do |t|
@@ -143,6 +144,19 @@ ActiveRecord::Schema.define(version: 20141122001353) do
     t.boolean  "active"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "systems", force: true do |t|
+    t.string   "virtual_machine_identifier"
+    t.text     "raw_data"
+    t.integer  "customer_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "systems_users", id: false, force: true do |t|
+    t.integer "system_id"
+    t.integer "user_id"
   end
 
   create_table "users", force: true do |t|

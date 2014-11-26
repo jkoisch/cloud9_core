@@ -62,6 +62,7 @@ Rails.application.routes.draw do
       end
       resources :costs
       resources :prices
+      resources :systems
     end
   end
 

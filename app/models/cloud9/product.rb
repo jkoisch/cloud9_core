@@ -11,12 +11,13 @@
 #  active              :boolean
 #  created_at          :datetime
 #  updated_at          :datetime
+#  status              :string(255)
+#  notes               :text
 #
 
 class  Cloud9::Product < ActiveRecord::Base
   include Concerns::Invoiceable
 
-  has_many :requirements, as: :requireable
   has_many :product_licenses
   has_many :cost_history, :class => Cloud9::Cost, :dependent => :destroy
   has_many :price_history, :class => Cloud9::Price, :dependent => :destroy
@@ -24,7 +25,6 @@ class  Cloud9::Product < ActiveRecord::Base
   has_many :prices, :class => Cloud9::Price, :dependent => :destroy
   belongs_to :product_type
   has_and_belongs_to_many :product_groups
-  has_and_belongs_to_many :orders
 
   accepts_nested_attributes_for :cost_history
   accepts_nested_attributes_for :price_history
@@ -84,6 +84,22 @@ class  Cloud9::Product < ActiveRecord::Base
     price.active = true
     price.save
     price
+  end
+
+  def self.active_product_list
+    Cloud9::Product.where(active: true)
+  end
+
+  def self.ram_id
+    98499
+  end
+
+  def self.cpu_id
+    98498
+  end
+
+  def self.hd_id
+    98497
   end
 
 end

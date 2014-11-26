@@ -44,6 +44,70 @@ namespace :db do
       p.save!
     end
 
+    # Build Customer side of this
+
+    10.times do
+      c = Cloud9::Customer.create(
+          #  first_name        :string(255)
+          #  last_name         :string(255)
+          #  organization_name :string(255)
+          #  role              :string(255)
+          #  email             :string(255)
+          first_name: Faker::Name.first_name,
+          last_name: Faker::Name.last_name,
+          organization_name: Faker::Company.name,
+          email: Faker::Internet.email
+
+      )
+
+      #System
+      #  virtual_machine_identifier :string(255)
+      #  raw_data                   :text
+      #  customer_id                :integer
+
+      s = Cloud9::System.create(
+        virtual_machine_identifier: Faker::Vehicle.vin,
+        customer_id: c.id
+      )
+
+      user_list = []
+      5.times do
+        user_list << Cloud9::User.create(
+          admin: false,
+          email: Faker::Internet.email
+        )
+      end
+
+      s.cloud9_users = user_list
+      s.save
+
+      # Component
+      #  id         :integer          not null, primary key
+      #  product_id :integer
+      #  notes      :text
+      #  system_id  :integer
+      #  created_at :datetime
+      #  updated_at :datetime
+      #  active     :boolean
+      ram = Cloud9::Component.create(
+        system_id: s.id,
+        active: true,
+        product_id: Cloud9::Product.ram_id
+      )
+      hd = Cloud9::Component.create(
+          system_id: s.id,
+          active: true,
+          product_id: Cloud9::Product.hd_id
+      )
+      cpu = Cloud9::Component.create(
+          system_id: s.id,
+          active: true,
+          product_id: Cloud9::Product.cpu_id
+      )
+
+
+    end
+
   end
 
 end
