@@ -12,8 +12,7 @@ class CreateSystemMetrics < ActiveRecord::Migration
     end
 
     add_column :components, :quantity, :bigint
-    remove_column :components, :active
 
-
+    add_column :products, :required_quantity, :bigint
   end
 end

@@ -13,6 +13,7 @@
 #  updated_at          :datetime
 #  status              :string(255)
 #  notes               :text
+#  required_quantity   :integer
 #
 
 class  Cloud9::Product < ActiveRecord::Base

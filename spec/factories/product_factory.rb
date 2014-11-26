@@ -26,4 +26,10 @@ ns = Cloud9::Product
       name "product with category"
       description "product with category (type)"
     end
+
+    factory :product_with_required_quantity, :class => ns do
+      name "product_1"
+      description "product_1 description"
+      required_quantity 500000000
+    end
   end

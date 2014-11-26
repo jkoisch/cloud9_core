@@ -17,24 +17,17 @@ class Cloud9::System < ActiveRecord::Base
   belongs_to :customer, :class_name => 'Cloud9::Customer'
   has_and_belongs_to_many :users, :class_name => 'Cloud9::User'
 
+  validates_presence_of :virtual_machine_identifier
+
   after_create :defaults
 
   def defaults
     if self.components.blank?
-      c_ram = Cloud9::Component.create(
-          system_id: self.id,
-          product_id: Cloud9::Product.ram_id
-      )
-
-      c_cpu = Cloud9::Component.create(
-          system_id: self.id,
-          product_id: Cloud9::Product.cpu_id
-      )
-
-      c_hd = Cloud9::Component.create(
-          system_id: self.id,
-          product_id: Cloud9::Product.hd_id
-      )
+      ['ram', 'cpu', 'hd'].each do |k|
+        id = eval("Cloud9::Product.#{k}_id")
+        self.components << Cloud9::Component.new(system_id: self.id, product_id: id)
+      end
+      self.save
     end
   end
 
