@@ -8,7 +8,7 @@
 #  system_id  :integer
 #  created_at :datetime
 #  updated_at :datetime
-#  active     :boolean
+#  quantity   :integer
 #
 
 class Cloud9::Component < ActiveRecord::Base

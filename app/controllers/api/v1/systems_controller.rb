@@ -1,17 +1,33 @@
 module Api
   module V1
     class SystemsController < ApplicationController
+      skip_before_action :verify_authenticity_token
 
       def index
         render json: Cloud9::System.all
       end
 
-      def create
-
+      def show
+        render json: system
       end
 
-      def auto_update
+      def create
+        respond_with :api, :v1, Cloud9::System.create(product_params)
+      end
 
+      def update
+        respond_with system.update(product_params)
+      end
+
+      def measurement
+        updated_systems = []
+
+        p params
+
+        params[:measurements].each do |sys|
+          updated_systems << system(sys)
+        end
+        render json: updated_systems
       end
 
       private
@@ -20,43 +36,31 @@ module Api
         #  virtual_machine_identifier :string(255)
         #  raw_data                   :text
         #  customer_id                :integer
-        params.require(:system).permit(:virtual_machine_identifier, :notes, :customer_id, :ram, :cpu, :hd_space, :users)
+        params.require(:system).permit(
+            :virtual_machine_identifier,
+            :notes,
+            :customer_id,
+            :ram,
+            :cpu,
+            :hd_space,
+            :users,
+            :measurements_attributes  => [:virtual_machine_identifier,
+                                          :customer,
+                                          :notes,
+                                          :ram,
+                                          :cpu,
+                                          :hd_space,
+                                          :users]
+        )
       end
 
-      def system
-        system = Cloud9::System.find_or_initialize_by(
-          virtual_machine_identifier: params[:system][:virtual_machine_identifier],
-          customer_id: params[:system][:customer_id]
+      def system(sys)
+        system = Cloud9::System.find_or_create_by(
+          virtual_machine_identifier: sys[:virtual_machine_identifier],
+          customer_id: sys[:customer_id]
         )
 
-        if system.new_record?
-          system.save
-        else
-          system.components.each do |c|
-            c.active = false
-          end
-        end
-
-        c_ram = Cloud9::Component.create(
-          system_id: system.id,
-          active: true,
-          product_id: Product.ram_id
-        )
-
-        c_cpu = Cloud9::Component.create(
-            system_id: system.id,
-            active: true,
-            product_id: Product.cpu_id
-        )
-
-        c_hd = Cloud9::Component.create(
-            system_id: system.id,
-            active: true,
-            product_id: Product.hd_id
-        )
-
-
-
+        system.update_measurement(sys)
       end
 
     end

@@ -62,7 +62,11 @@ Rails.application.routes.draw do
       end
       resources :costs
       resources :prices
-      resources :systems
+      resources :systems do
+        collection do
+          post 'measurement'
+        end
+      end
     end
   end
 

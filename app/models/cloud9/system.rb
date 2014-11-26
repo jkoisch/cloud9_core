@@ -12,8 +12,43 @@
 
 class Cloud9::System < ActiveRecord::Base
 
-  has_many :cloud9_components, :class_name => 'Cloud9::Component'
-  belongs_to :cloud9_customer, :class_name => 'Cloud9::Customer'
-  has_and_belongs_to_many :cloud9_users, :class_name => 'Cloud9::User'
+  has_many :components, :class_name => 'Cloud9::Component'
+  has_many :measurements, :class_name => 'Cloud9::Measurement'
+  belongs_to :customer, :class_name => 'Cloud9::Customer'
+  has_and_belongs_to_many :users, :class_name => 'Cloud9::User'
+
+  after_create :defaults
+
+  def defaults
+    if self.components.blank?
+      c_ram = Cloud9::Component.create(
+          system_id: self.id,
+          product_id: Cloud9::Product.ram_id
+      )
+
+      c_cpu = Cloud9::Component.create(
+          system_id: self.id,
+          product_id: Cloud9::Product.cpu_id
+      )
+
+      c_hd = Cloud9::Component.create(
+          system_id: self.id,
+          product_id: Cloud9::Product.hd_id
+      )
+    end
+  end
+
+  #TODO encapsulated logic to deal with updating metrics. This should eventually kick off alerts, etc.
+  def update_measurement(sys)
+    self.measurements << Cloud9::Measurement.new(
+      system_id: sys[:system_id],
+      raw_metric_data: sys.to_s,
+      ram: sys[:ram],
+      cpu: sys[:cpu],
+      hard_drive_space: sys[:hd_space]
+    )
+
+    self.save
+  end
 
 end

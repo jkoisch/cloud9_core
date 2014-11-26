@@ -78,7 +78,7 @@ namespace :db do
         )
       end
 
-      s.cloud9_users = user_list
+      s.users = user_list
       s.save
 
       # Component
@@ -91,17 +91,17 @@ namespace :db do
       #  active     :boolean
       ram = Cloud9::Component.create(
         system_id: s.id,
-        active: true,
+        quantity: 500000000,
         product_id: Cloud9::Product.ram_id
       )
       hd = Cloud9::Component.create(
           system_id: s.id,
-          active: true,
+          quantity: 500000000,
           product_id: Cloud9::Product.hd_id
       )
       cpu = Cloud9::Component.create(
           system_id: s.id,
-          active: true,
+          quantity: 2700000000,
           product_id: Cloud9::Product.cpu_id
       )
 

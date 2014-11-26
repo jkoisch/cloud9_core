@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141126012539) do
+ActiveRecord::Schema.define(version: 20141126183140) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20141126012539) do
     t.integer  "system_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "active"
+    t.integer  "quantity",   limit: 8
   end
 
   create_table "components_orders", id: false, force: true do |t|
@@ -72,6 +72,17 @@ ActiveRecord::Schema.define(version: 20141126012539) do
     t.datetime "fail_date"
     t.datetime "pay_date"
     t.datetime "bill_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "measurements", force: true do |t|
+    t.integer  "system_id"
+    t.text     "raw_metric_data"
+    t.integer  "ram"
+    t.integer  "cpu"
+    t.integer  "hard_drive_space"
+    t.integer  "per_user_ram_utilization"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
