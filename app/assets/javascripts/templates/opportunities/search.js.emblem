@@ -1,0 +1,11 @@
+article#opportunity
+h1 Search
+
+p
+  ' ID:
+  view Ember.TextField
+
+p
+  input type='submit' value='Search' click="searchOpportunities"
+  if searching
+    .unsaved Searching ....

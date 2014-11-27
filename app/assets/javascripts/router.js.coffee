@@ -5,7 +5,10 @@ Cloud9Core.Router.reopen
 Cloud9Core.Router.map ->
 #  @resource 'opportunity', path: '/opportunities/:id', ->
 #    @route 'edit'
-  @resource 'opportunities'
+  @resource 'opportunities', path: '/opportunities', (->
+    @route 'search', path: '/search'
+    @resource 'opportunity', path: '/:id'
+  )
   @resource 'customers'
   @resource 'groups'
   @resource 'products', path: '/products', ->

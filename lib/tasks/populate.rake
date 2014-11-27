@@ -57,7 +57,6 @@ namespace :db do
           last_name: Faker::Name.last_name,
           organization_name: Faker::Company.name,
           email: Faker::Internet.email
-
       )
 
       #System
@@ -80,31 +79,6 @@ namespace :db do
 
       s.users = user_list
       s.save
-
-      # Component
-      #  id         :integer          not null, primary key
-      #  product_id :integer
-      #  notes      :text
-      #  system_id  :integer
-      #  created_at :datetime
-      #  updated_at :datetime
-      #  active     :boolean
-      ram = Cloud9::Component.create(
-        system_id: s.id,
-        quantity: 500000000,
-        product_id: Cloud9::Product.ram_id
-      )
-      hd = Cloud9::Component.create(
-          system_id: s.id,
-          quantity: 500000000,
-          product_id: Cloud9::Product.hd_id
-      )
-      cpu = Cloud9::Component.create(
-          system_id: s.id,
-          quantity: 2700000000,
-          product_id: Cloud9::Product.cpu_id
-      )
-
 
     end
 

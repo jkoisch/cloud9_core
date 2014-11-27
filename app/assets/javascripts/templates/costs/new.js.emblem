@@ -6,4 +6,4 @@ fieldset
     dd: view Ember.TextField value=fields.amount
 
   dl
-    input type='submit' value='Save Cost Details' click='saveCost'
+    input type='submit' value='Save Cost' click='saveCost'
