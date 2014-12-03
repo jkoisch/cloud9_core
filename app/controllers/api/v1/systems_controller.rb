@@ -8,7 +8,8 @@ module Api
       end
 
       def show
-        # render json: system
+        _id = params[:id]
+        render json: system(_id)
       end
 
       def create
@@ -24,7 +25,7 @@ module Api
 
         params[:system][:measurements].each do |sys|
            p sys
-          updated_systems << system(sys)
+          updated_systems << build_system(sys)
         end
         render json: updated_systems
       end
@@ -36,7 +37,7 @@ module Api
         #  raw_data                   :text
         #  customer_id                :integer
         params.require(:system).permit(
-            :virtual_machine_identifier,
+            :id,
             :customer_id,
             :notes,
             :measurements_attributes  => [:virtual_machine_identifier,
@@ -48,7 +49,11 @@ module Api
                                           :users])
       end
 
-      def system(sys)
+      def system(_id)
+        Cloud9::System.find(_id)
+      end
+
+      def build_system(sys)
         system = Cloud9::System.find_or_create_by(
           virtual_machine_identifier: sys[:virtual_machine_identifier],
           customer_id: sys[:customer_id]
