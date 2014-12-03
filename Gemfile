@@ -31,7 +31,8 @@ group :test do
 end
 
 group :development do
-  gem 'thin'
+  #gem 'thin'
+  gem "passenger"
   gem 'spring'
   gem 'pry'
   gem 'better_errors'
