@@ -1,8 +1,16 @@
-Cloud9Core.OpportunitiesSearchController = Ember.Controller.extend(
-  searching: ->
-    return true
+Cloud9Core.OpportunitiesSearchController = Ember.ArrayController.extend(
+
+  init: ->
+    @_super()
+    console.log "In Opportunity Search Controller"
+    @set('search','')
 
   actions:
-    searchOpportunities: ->
-      return true
+
+    searchOpportunity: ->
+      search = @get('search')
+      console.log 'About to go to ONE Opportunity      ' + search
+      @transitionToRoute '/opportunities/' + search
+
+
 )

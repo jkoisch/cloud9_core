@@ -1,13 +1,12 @@
-class OpportunitiesController < ApplicationController  respond_to :json
+class Api::V1::OpportunitiesController < ApplicationController
+  respond_to :json
 
   def index
     render json: []
   end
 
   def show
-    @it = opportunity
-    p @it.to_s
-    render json: @it
+    render json: salesforce_opportunity, serializer: OpportunitySerializer
   end
 
   def create
@@ -16,7 +15,7 @@ class OpportunitiesController < ApplicationController  respond_to :json
 
   private
 
-  def opportunity
+  def salesforce_opportunity
     opp = Salesforce::Opportunity.new(id: params[:id])
     Cloud9::Opportunity.new(opp.salesforce_data.to_h)
   end
@@ -28,5 +27,4 @@ class OpportunitiesController < ApplicationController  respond_to :json
   def opportunity_params
     params.require(:opportunity).permit(:name, :description, :id)
   end
-
 end

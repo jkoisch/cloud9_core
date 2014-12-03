@@ -67,6 +67,7 @@ Rails.application.routes.draw do
           post 'measurement'
         end
       end
+      resources :opportunities
     end
   end
 

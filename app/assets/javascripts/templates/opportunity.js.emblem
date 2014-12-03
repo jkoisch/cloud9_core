@@ -1,0 +1,12 @@
+article#opportunity
+  h1
+    model.id
+
+  dl
+    dt label Description
+    dd
+      model.description
+  dl
+    dt label AccountId
+    dd
+      model.accountId

@@ -8,11 +8,11 @@ module Api
       end
 
       def show
-        render json: system
+        # render json: system
       end
 
       def create
-        respond_with :api, :v1, Cloud9::System.create(product_params)
+        respond_with :api, :v1, Cloud9::System.create(system_params)
       end
 
       def update
@@ -22,9 +22,8 @@ module Api
       def measurement
         updated_systems = []
 
-        p params
-
-        params[:measurements].each do |sys|
+        params[:system][:measurements].each do |sys|
+           p sys
           updated_systems << system(sys)
         end
         render json: updated_systems
@@ -38,20 +37,15 @@ module Api
         #  customer_id                :integer
         params.require(:system).permit(
             :virtual_machine_identifier,
-            :notes,
             :customer_id,
-            :ram,
-            :cpu,
-            :hd_space,
-            :users,
+            :notes,
             :measurements_attributes  => [:virtual_machine_identifier,
                                           :customer,
                                           :notes,
                                           :ram,
                                           :cpu,
                                           :hd_space,
-                                          :users]
-        )
+                                          :users])
       end
 
       def system(sys)

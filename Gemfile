@@ -50,5 +50,6 @@ gem 'ember-source'
 gem 'emblem-rails'
 gem 'ffaker'
 gem "twitter-bootstrap-rails"
+gem 'hashie_rails'
 
 

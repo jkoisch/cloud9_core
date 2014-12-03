@@ -1,11 +1,12 @@
 article#opportunity
 h1 Search
 
-p
-  ' ID:
-  view Ember.TextField
+fieldset
+  dl
+    dt: label ID:
+    dd: view Ember.TextField value=search placeholder="salesforce opportunity id" classNames="search"
 
-p
-  input type='submit' value='Search' click="searchOpportunities"
-  if searching
-    .unsaved Searching ....
+  dl
+    dt
+    dd
+        input type='submit' value='Search SalesForce' click='searchOpportunity'
