@@ -10,6 +10,8 @@
 #  amount     :integer
 #
 
+#The cost of a Product that will be recorded against so that we can figure out margins. May be active or inactive,
+# and keeps the creation date so that metrics may be tied to cost-at-time-of-contract
 class Cloud9::Cost < ActiveRecord::Base
   belongs_to :product
 

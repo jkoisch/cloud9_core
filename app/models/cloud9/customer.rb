@@ -12,9 +12,11 @@
 #  updated_at        :datetime
 #
 
+#A CLoud9::Customer is a first class object that has many systems, will manage contact and payment information, will
+# be assigned roles to manage some things in the Cloud9 Universe (add a user, for example)
 class Cloud9::Customer < ActiveRecord::Base
 
-  has_many :cloud9_users
+  has_many :cloud9_systems, :class_name => 'Cloud9::System'
 
 
 end

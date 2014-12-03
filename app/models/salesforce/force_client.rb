@@ -10,6 +10,7 @@ module Salesforce
     end
 
 
+    #initializes the client to get salesforce data
     class Base
       attr_accessor :username, :password, :security_token, :salesforce_response, :client
 
@@ -25,10 +26,12 @@ module Salesforce
         end
       end
 
+      #integrating with salesforce happens through configuration of the app
       def method_missing(m, *args)
 
+        #todo We need to add a list of available 'methods' here to gut check
         begin
-          @client.find(m.to_s, args[0])
+          self.client.find(m.to_s, args[0])
         rescue
           super
         end

@@ -13,6 +13,7 @@
 #  updated_at               :datetime
 #
 
+# Systems get measured periodically to check usage, capacity, etc. This simply holds the values
 class Cloud9::Measurement < ActiveRecord::Base
 
   belongs_to :cloud9_system, :class_name => 'Cloud9::System'

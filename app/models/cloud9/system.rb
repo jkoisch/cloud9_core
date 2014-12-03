@@ -10,6 +10,8 @@
 #  updated_at                 :datetime
 #
 
+#Cloud9::Systems are the key operational item for customers and admins to work with. Systems contain components, can
+# be built using orders, can be measured, and have users
 class Cloud9::System < ActiveRecord::Base
 
   has_many :components, :class_name => 'Cloud9::Component'

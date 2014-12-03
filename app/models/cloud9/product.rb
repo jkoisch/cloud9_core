@@ -16,6 +16,8 @@
 #  required_quantity   :integer
 #
 
+#Cloud9::Products can be invoiced against because they have a cost and a price, can be grouped into convenient sets
+# (sell a Basic System, not 12 products), and can be associated with a license.
 class  Cloud9::Product < ActiveRecord::Base
   include Concerns::Invoiceable
 
