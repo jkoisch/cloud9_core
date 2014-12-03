@@ -1,4 +1,5 @@
-class OpportunitiesController < ApplicationController  respond_to :json
+class OpportunitiesController < ApplicationController
+  respond_to :json
 
   def index
     render json: []
