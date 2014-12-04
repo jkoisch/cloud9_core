@@ -68,6 +68,11 @@ Rails.application.routes.draw do
         end
       end
       resources :opportunities
+      resources :customers do
+        resources :components, shallow: true
+        resources :measurements, shallow: true
+      end
+
     end
   end
 

@@ -17,6 +17,6 @@
 class Cloud9::Customer < ActiveRecord::Base
 
   has_many :cloud9_systems, :class_name => 'Cloud9::System'
-
+  has_many :cloud9_invoices, :class_name => 'Cloud9::Invoice'
 
 end

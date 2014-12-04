@@ -1,0 +1,15 @@
+article#customer
+
+  h1
+    model.organizationName
+
+  dl
+    dt Customer :
+    dd
+      controller.fullName
+
+  dl
+    dt Email :
+    dd
+      model.email
+

@@ -1,0 +1,21 @@
+article#customers
+  .col-xs-2
+      table
+        tr
+          th
+            h1 Cloud9 Customers
+        tr
+          td
+            ul
+              each cust in controller
+                link-to 'customer' cust tagName="li"
+                  cust.organizationName
+  .col-xs-1
+  .col-xs-3
+    outlet details
+  .col-xs-1
+  .col-xs-2
+    outlet sub-details
+  .col-xs-1
+  .col-xs-2
+    outlet edit-details

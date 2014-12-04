@@ -1,0 +1,20 @@
+article#system
+
+  h1
+    virtualMachineIdentifier
+
+  dl
+    dt Customer :
+    dd
+      link-to 'customer' customerId
+        customerName
+
+  dl
+    dt Update At :
+    dd
+      updatedAt
+  dl
+    dt Components
+  dl
+    dt Measurements
+
