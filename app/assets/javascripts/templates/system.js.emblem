@@ -15,6 +15,16 @@ article#system
       updatedAt
   dl
     dt Components
+    each comp in components
+      dd
+        comp.quantity
+        comp.product.name
+        comp.active
   dl
     dt Measurements
+    each m in measurements
+      dd
+        m.ram
+        m.cpu
+        m.hardDriveSpace
 
