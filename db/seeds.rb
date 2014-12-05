@@ -43,5 +43,13 @@ Cloud9::ProductType.create(
     description: "Miscellaneous"
 )
 
+#Placeholder Customer for planning and orders
+#todo this should be set to the back office channel to make sure they are receiving emails, notifications, etc. This is taken care of in the configuration settings
+c = Cloud9::Customer.create(
+    first_name: Settings.cloud9_customer_first_name,
+    last_name: Settings.cloud9_customer_last_name,
+    organization_name: Settings.cloud9_customer_organization_name,
+    email: Settings.cloud9_customer_email
+)
 
 
