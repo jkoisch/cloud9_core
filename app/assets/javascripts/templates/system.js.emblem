@@ -22,9 +22,7 @@ article#system
         comp.active
   dl
     dt Measurements
+    dd Ram | CPU | Total HD
     each m in measurements
-      dd
-        m.ram
-        m.cpu
-        m.hardDriveSpace
+      dd #{m.createdAt} | #{m.ram} | #{m.cpu} | #{m.totalHdSpace}
 
