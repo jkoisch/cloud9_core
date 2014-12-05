@@ -44,6 +44,8 @@ namespace :db do
       p.save!
     end
 
+    #Build core product offerings
+
     # Build Customer side of this
 
     10.times do
@@ -81,7 +83,6 @@ namespace :db do
       s.save
 
     end
-
   end
 
 end
