@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141126232346) do
+ActiveRecord::Schema.define(version: 20141205053421) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,10 +82,16 @@ ActiveRecord::Schema.define(version: 20141126232346) do
     t.text     "raw_metric_data"
     t.integer  "ram"
     t.integer  "cpu"
-    t.integer  "hard_drive_space"
-    t.integer  "per_user_ram_utilization"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.decimal  "average_ram_utilization", precision: 5, scale: 2
+    t.integer  "total_hd_space"
+    t.integer  "free_hd_space"
+    t.integer  "total_users"
+    t.integer  "pagefile_size"
+    t.boolean  "dataserver"
+    t.string   "datastore_location"
+    t.string   "pagefile_location"
   end
 
   create_table "orders", force: true do |t|

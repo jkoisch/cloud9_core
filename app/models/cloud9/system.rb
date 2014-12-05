@@ -21,6 +21,9 @@ class Cloud9::System < ActiveRecord::Base
 
   validates_presence_of :virtual_machine_identifier
 
+  #TODO We need to make sure there are no systems without a customer
+  #validates_associated :customer
+
   after_create :defaults
 
   def defaults
@@ -31,6 +34,13 @@ class Cloud9::System < ActiveRecord::Base
       end
       self.save
     end
+
+    if self.customer.blank?
+      cloud9CustomerProfile = Cloud9::Customer.find_by(organization_name: "Cloud9RealTime")
+      self.customer_id = cloud9CustomerProfile.id
+      self.save
+    end
+
   end
 
   #TODO encapsulated logic to deal with updating metrics. This should eventually kick off alerts, etc.

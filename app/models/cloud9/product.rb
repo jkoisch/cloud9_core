@@ -27,6 +27,7 @@ class  Cloud9::Product < ActiveRecord::Base
   has_many :costs, :class => Cloud9::Cost, :dependent => :destroy
   has_many :prices, :class => Cloud9::Price, :dependent => :destroy
   belongs_to :product_type
+  has_one :cloud9_component, :class_name => 'Cloud9::Component'
   has_and_belongs_to_many :product_groups
 
   accepts_nested_attributes_for :cost_history
