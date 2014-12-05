@@ -53,5 +53,5 @@ gem 'ffaker'
 gem "twitter-bootstrap-rails"
 gem 'hashie_rails'
 gem 'rails_12factor'
-
+gem 'rails_config'
 
