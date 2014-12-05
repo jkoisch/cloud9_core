@@ -22,10 +22,11 @@ module Api
 
       def measurement
         updated_systems = []
+        customer = check_customer(system_params)
 
         params[:system][:measurements].each do |sys|
-           p sys
-          updated_systems << build_system(sys)
+          p sys
+          updated_systems << build_system(sys, customer.id)
         end
         render json: updated_systems
       end
@@ -53,13 +54,21 @@ module Api
         Cloud9::System.find(_id)
       end
 
-      def build_system(sys)
+      def build_system(sys, customer_id)
         system = Cloud9::System.find_or_create_by(
           virtual_machine_identifier: sys[:virtual_machine_identifier],
-          customer_id: sys[:customer_id]
+          customer_id: customer_id
         )
 
         system.update_measurement(sys)
+      end
+
+      def check_customer(sys)
+        customer = Cloud9::Customer.where(id: sys[:customer_id]).first
+        if customer.blank?
+          customer = Cloud9::Customer.cloud9_default
+        end
+        customer
       end
 
     end

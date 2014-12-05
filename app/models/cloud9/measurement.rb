@@ -2,15 +2,21 @@
 #
 # Table name: measurements
 #
-#  id                       :integer          not null, primary key
-#  system_id                :integer
-#  raw_metric_data          :text
-#  ram                      :integer
-#  cpu                      :integer
-#  hard_drive_space         :integer
-#  per_user_ram_utilization :integer
-#  created_at               :datetime
-#  updated_at               :datetime
+#  id                      :integer          not null, primary key
+#  system_id               :integer
+#  raw_metric_data         :text
+#  ram                     :integer
+#  cpu                     :integer
+#  created_at              :datetime
+#  updated_at              :datetime
+#  average_ram_utilization :decimal(5, 2)
+#  total_hd_space          :integer
+#  free_hd_space           :integer
+#  total_users             :integer
+#  pagefile_size           :integer
+#  dataserver              :boolean
+#  datastore_location      :string(255)
+#  pagefile_location       :string(255)
 #
 
 # Systems get measured periodically to check usage, capacity, etc. This simply holds the values

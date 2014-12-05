@@ -19,4 +19,13 @@ class Cloud9::Customer < ActiveRecord::Base
   has_many :cloud9_systems, :class_name => 'Cloud9::System'
   has_many :cloud9_invoices, :class_name => 'Cloud9::Invoice'
 
+  def self.cloud9_default
+    Cloud9::Customer.find_by(
+        first_name: Settings.cloud9_customer_first_name,
+        last_name: Settings.cloud9_customer_last_name,
+        organization_name: Settings.cloud9_customer_organization_name,
+        email: Settings.cloud9_customer_email
+    )
+  end
+
 end

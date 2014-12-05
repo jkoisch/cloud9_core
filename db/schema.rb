@@ -84,11 +84,11 @@ ActiveRecord::Schema.define(version: 20141205053421) do
     t.integer  "cpu"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "average_ram_utilization", precision: 5, scale: 2
-    t.integer  "total_hd_space"
-    t.integer  "free_hd_space"
+    t.decimal  "average_ram_utilization",           precision: 5, scale: 2
+    t.integer  "total_hd_space",          limit: 8
+    t.integer  "free_hd_space",           limit: 8
     t.integer  "total_users"
-    t.integer  "pagefile_size"
+    t.integer  "pagefile_size",           limit: 8
     t.boolean  "dataserver"
     t.string   "datastore_location"
     t.string   "pagefile_location"

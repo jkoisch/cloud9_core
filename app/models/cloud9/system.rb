@@ -50,9 +50,15 @@ class Cloud9::System < ActiveRecord::Base
       raw_metric_data: sys.to_s,
       ram: sys[:ram],
       cpu: sys[:cpu],
-      hard_drive_space: sys[:hd_space]
+      total_hd_space: sys[:total_hd_space],
+      free_hd_space: sys[:free_hd_space],
+      average_ram_utilization: sys[:average_ram_utilization],
+      total_users: sys[:total_users],
+      pagefile_size: sys[:pagefile_size],
+      dataserver: sys[:dataserver],
+      datastore_location: sys[:datastore_location],
+      pagefile_location: sys[:pagefile_location]
     )
-
     self.save
   end
 

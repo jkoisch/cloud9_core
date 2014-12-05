@@ -22,10 +22,10 @@ class UpdateMeasurementAndSystemFields < ActiveRecord::Migration
     add_column :measurements, :average_ram_utilization, :decimal, precision: 5, scale: 2
 
     remove_column :measurements, :hard_drive_space
-    add_column :measurements, :total_hd_space, :integer
-    add_column :measurements, :free_hd_space, :integer
+    add_column :measurements, :total_hd_space, :bigint
+    add_column :measurements, :free_hd_space, :bigint
     add_column :measurements, :total_users, :integer
-    add_column :measurements, :pagefile_size, :integer
+    add_column :measurements, :pagefile_size, :bigint
     add_column :measurements, :dataserver, :boolean
 
     add_column :measurements, :datastore_location, :string
