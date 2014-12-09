@@ -2,7 +2,7 @@ module Salesforce
   class Opportunity < Salesforce::Base
     include ActiveModel::Model
 
-    attr_accessor :id
+    attr_accessor :id, :name
 
     define_model_callbacks :initialize, only: [:after]
 
@@ -11,5 +11,8 @@ module Salesforce
       @data
     end
 
+    def create
+      @client.create('Opportunity', self.name)
+    end
   end
 end
