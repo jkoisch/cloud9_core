@@ -14,14 +14,14 @@ module Salesforce
         set_client
       end
     end
-
-    def method_missing(m, *args)
-      begin
-        salesforce_data.send(m)
-      rescue
-        super
-      end
-    end
+    #
+    # def method_missing(m, *args)
+    #   begin
+    #     salesforce_data.send(m)
+    #   rescue
+    #     super
+    #   end
+    # end
 
     def data
       @data
