@@ -29,13 +29,27 @@ module Salesforce
       #integrating with salesforce happens through configuration of the app
       def method_missing(m, *args)
 
-        #todo We need to add a list of available 'methods' here to gut check
-        begin
-          self.client.find(m.to_s, args[0])
-        rescue
-          super
+        if m.to_s.eql?('describe')
+          self.client.describe
+        elsif m.to_s.eql?('search')
+          self.client.search(args[0])
+        else
+          #todo We need to add a list of available 'methods' here to gut check
+          begin
+            self.client.find(m.to_s, args[0])
+          rescue
+            super
+          end
         end
 
+      end
+
+      def query(_soql)
+        self.client.query(_soql)
+      end
+
+      def create(_type, _name)
+        self.client.create(_type, Name: _name)
       end
 
     end
