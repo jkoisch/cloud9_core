@@ -59,7 +59,6 @@ module Api
           virtual_machine_identifier: sys[:virtual_machine_identifier],
           customer_id: customer_id
         )
-
         system.update_measurement(sys)
       end
 
