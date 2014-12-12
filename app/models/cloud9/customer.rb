@@ -51,7 +51,7 @@ class Cloud9::Customer < ActiveRecord::Base
       salesforce_url: acct.salesforce_data.attributes.url
     )
     self.salesforce_reference = ref
-    self.organization_name = acct.salesforce_data.Pathname
+    self.organization_name = acct.salesforce_data.Name
     self
   end
 
