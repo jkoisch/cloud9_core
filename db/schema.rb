@@ -11,10 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141205053421) do
+ActiveRecord::Schema.define(version: 20141212163930) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "cases", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "components", force: true do |t|
     t.integer  "product_id"
@@ -47,6 +52,7 @@ ActiveRecord::Schema.define(version: 20141205053421) do
     t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "cloud9_identifier"
   end
 
   create_table "invoice_groups", force: true do |t|
@@ -92,6 +98,11 @@ ActiveRecord::Schema.define(version: 20141205053421) do
     t.boolean  "dataserver"
     t.string   "datastore_location"
     t.string   "pagefile_location"
+  end
+
+  create_table "opportunities", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "orders", force: true do |t|
@@ -162,6 +173,15 @@ ActiveRecord::Schema.define(version: 20141205053421) do
     t.string   "requireable_type"
     t.text     "requirement_rule"
     t.boolean  "active"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "salesforce_references", force: true do |t|
+    t.string   "salesforce_id"
+    t.string   "salesforce_url"
+    t.integer  "referenceable_id"
+    t.string   "referenceable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
