@@ -1,5 +1,5 @@
 // Fetched from channel: release, with url http://builds.emberjs.com/release/ember.js
-// Fetched on: 2014-11-15T02:02:00Z
+// Fetched on: 2014-12-12T20:17:01Z
 /*!
  * @overview  Ember - JavaScript Application Framework
  * @copyright Copyright 2011-2014 Tilde Inc. and contributors
@@ -7,7 +7,7 @@
  *            Portions Copyright 2008-2011 Apple Inc. All rights reserved.
  * @license   Licensed under MIT license
  *            See https://raw.github.com/emberjs/ember.js/master/LICENSE
- * @version   1.8.1
+ * @version   1.8.2+pre.c30913c3
  */
 
 (function() {
@@ -10113,6 +10113,10 @@ enifed("ember-handlebars/string",
       @return {Handlebars.SafeString} a string that will not be html escaped by Handlebars
     */
     function htmlSafe(str) {
+      if (str === null || str === undefined) {
+        return "";
+      }
+
       if (typeof str !== 'string') {
         str = ''+str;
       }
@@ -13647,7 +13651,7 @@ enifed("ember-metal/core",
 
       @class Ember
       @static
-      @version 1.8.1
+      @version 1.8.2+pre.c30913c3
     */
 
     if ('undefined' === typeof Ember) {
@@ -13674,10 +13678,10 @@ enifed("ember-metal/core",
     /**
       @property VERSION
       @type String
-      @default '1.8.1'
+      @default '1.8.2+pre.c30913c3'
       @static
     */
-    Ember.VERSION = '1.8.1';
+    Ember.VERSION = '1.8.2+pre.c30913c3';
 
     /**
       Standard environmental variables. You can define these in a global `EmberENV`

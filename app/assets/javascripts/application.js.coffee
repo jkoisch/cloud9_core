@@ -9,6 +9,3 @@
 
 # for more details see: http://emberjs.com/guides/application/
 window.Cloud9Core = Ember.Application.create(rootElement: '#ember-app')
-
-
-

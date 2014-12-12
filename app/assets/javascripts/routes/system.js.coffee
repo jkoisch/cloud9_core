@@ -6,6 +6,7 @@ Cloud9Core.SystemRoute = Ember.Route.extend
   setupController: (controller, model) ->
     controller.set 'model', model
     controller.set('customerName', @thisCustomer.get('fullFormalName'))
+    controller.set('orgName', @thisCustomer.get('organizationName'))
   renderTemplate: ->
     @render "system",
       outlet: "details"

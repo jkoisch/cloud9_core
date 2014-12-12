@@ -33,8 +33,8 @@ class Cloud9::Customer < ActiveRecord::Base
   def self.retrieve_by_cloud9_id(identifier)
     cust = Cloud9::Customer.find_or_initialize_by(cloud9_identifier: identifier)
     if cust.new_record?
-      #todo ... put off on delyed job
-      cust.attach_to_salesforce
+      cust.save!
+      cust.delay.attach_to_salesforce
     end
     cust.save!
     cust
@@ -44,6 +44,8 @@ class Cloud9::Customer < ActiveRecord::Base
     acct = Salesforce::Account.new(account_number: self.cloud9_identifier)
     acct.find
 
+    p acct.salesforce_data
+
     ref = Cloud9::SalesforceReference.new(
       referenceable_id: self.id,
       referenceable_type: self.class.name,
@@ -52,6 +54,7 @@ class Cloud9::Customer < ActiveRecord::Base
     )
     self.salesforce_reference = ref
     self.organization_name = acct.salesforce_data.Name
+    self.save!
     self
   end
 

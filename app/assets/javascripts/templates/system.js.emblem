@@ -4,9 +4,14 @@ article#system
     virtualMachineIdentifier
 
   dl
-    dt Customer :
+    dt Organization:
     dd
       link-to 'customer' customerId
+        orgName
+
+  dl
+    dt Contact :
+    dd
         customerName
 
   dl
@@ -22,7 +27,7 @@ article#system
         comp.active
   dl
     dt Measurements
-    dd Date | Ram | CPU | Total HD
+    dd Ram | CPU | Total HD | Timestamp
     each m in measurements
-      dd #{m.createdAt} | #{m.ram} | #{m.cpu} | #{m.totalHdSpace}
+      dd #{m.ram} | #{m.cpu} | #{m.totalHdSpace} | #{m.createdAt}
 

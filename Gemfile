@@ -10,9 +10,6 @@ gem 'pg'
 
 gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-# gem 'jbuilder', '~> 2.0'
-# bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'wuparty'
 gem 'yard'
@@ -20,7 +17,8 @@ gem 'annotate'
 gem 'restforce'
 gem 'figaro'
 gem 'active_model_serializers'
-gem "passenger"
+gem 'passenger'
+gem 'delayed_job_active_record'
 
 gem 'rspec-rails', '~>3.0.0' ,:group => [:test, :development]
 group :test do
@@ -43,11 +41,13 @@ gem 'haml-rails'
 gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
 gem 'ember-rails', git: 'git://github.com/emberjs/ember-rails.git'
-gem 'ember-source'
+gem 'handlebars-source', '~> 1.0'
+gem 'ember-source', '~> 1.8.1'
 gem 'emblem-rails'
 gem 'ffaker'
 gem "twitter-bootstrap-rails"
 gem 'hashie_rails'
 gem 'rails_12factor'
 gem 'rails_config'
+gem 'daemons'
 
