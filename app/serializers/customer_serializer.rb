@@ -1,3 +1,4 @@
 class CustomerSerializer < ActiveModel::Serializer
-  attributes :first_name, :last_name, :organization_name, :role, :email, :id
+  attributes :organization_name, :id
+  has_many :contacts
 end

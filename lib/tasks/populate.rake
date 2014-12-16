@@ -50,15 +50,8 @@ namespace :db do
 
     10.times do
       c = Cloud9::Customer.create(
-          #  first_name        :string(255)
-          #  last_name         :string(255)
           #  organization_name :string(255)
-          #  role              :string(255)
-          #  email             :string(255)
-          first_name: Faker::Name.first_name,
-          last_name: Faker::Name.last_name,
-          organization_name: Faker::Company.name,
-          email: Faker::Internet.email
+          organization_name: Faker::Company.name
       )
 
       #System

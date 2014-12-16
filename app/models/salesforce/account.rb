@@ -16,6 +16,13 @@ module Salesforce
       end
     end
 
+    def find_contacts
+      if self.id.nil?
+        self.find
+      end
+      @client.query("select Id, Email, Name, Status__c, IsDeleted, Primary_Contact__c, Authorized_Contact__c from Contact where AccountId = '#{self.id}'")
+    end
+
     def salesforce_data
       @data ||= @client.account(self.id.to_s)
       @data

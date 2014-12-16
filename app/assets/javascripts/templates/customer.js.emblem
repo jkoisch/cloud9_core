@@ -4,12 +4,12 @@ article#customer
     model.organizationName
 
   dl
-    dt Customer :
-    dd
-      controller.fullName
+    dt Contacts:
+    each con in model.contacts
 
-  dl
-    dt Email :
-    dd
-      model.email
+      dd
+        con.customerContact
+
+
+
 

@@ -1,2 +1,2 @@
 Cloud9Core.CustomersController = Ember.ArrayController.extend
-  sortProperties: ['organizationName']
+  sortProperties: ['organizationName:desc']

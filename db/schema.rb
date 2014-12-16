@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141212192000) do
+ActiveRecord::Schema.define(version: 20141215235830) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,15 @@ ActiveRecord::Schema.define(version: 20141212192000) do
     t.integer "order_id"
   end
 
+  create_table "contacts", force: true do |t|
+    t.integer "cloud9_customer_id"
+    t.string  "email"
+    t.boolean "authorized"
+    t.boolean "primary"
+    t.string  "name"
+    t.string  "role"
+  end
+
   create_table "costs", force: true do |t|
     t.integer  "product_id"
     t.boolean  "active"
@@ -45,11 +54,7 @@ ActiveRecord::Schema.define(version: 20141212192000) do
   end
 
   create_table "customers", force: true do |t|
-    t.string   "first_name"
-    t.string   "last_name"
     t.string   "organization_name"
-    t.string   "role"
-    t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "cloud9_identifier"
