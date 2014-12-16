@@ -23,11 +23,8 @@ module Api
       def measurement
         updated_systems = []
         customer = check_customer(system_params)
+        params[:system][:measurements].each { |sys| updated_systems << build_system(sys, customer.id) }
 
-        params[:system][:measurements].each do |sys|
-          p sys
-          updated_systems << build_system(sys, customer.id)
-        end
         render json: updated_systems
       end
 
