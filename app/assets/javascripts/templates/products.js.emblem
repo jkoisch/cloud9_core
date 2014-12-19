@@ -6,6 +6,9 @@ article#products
             h1 Cloud9 Products
         tr
           td
+            input type='submit' value='Add Product' click='addProduct'
+        tr
+          td
             ul
               each product in controller
                 link-to 'product' product tagName="li"

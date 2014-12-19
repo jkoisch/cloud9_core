@@ -1,7 +1,4 @@
-article#product
-
-h1
-  model.name
+article#products
 
 if showUnsavedEditMessage
     .alert.alert-danger
@@ -14,19 +11,19 @@ if isSaving
 fieldset
   dl
     dt: label Name:
-    dd: view Ember.TextField value=model.name
+    dd: view Ember.TextField value=fields.name
   dl
     dt: label Active:
-    dd: view Ember.Checkbox class=toggle checked=model.active
+    dd: view Ember.Checkbox class=toggle checked=fields.active
   dl
     dt: label Invoice Name:
-    dd: view Ember.TextField value=model.invoiceName
+    dd: view Ember.TextField value=fields.invoiceName
   dl
     dt: label Description
-    dd: view Ember.TextArea value=model.description
+    dd: view Ember.TextArea value=fields.description
   dl
     dt: label Invoice Description
-    dd: view Ember.TextArea value=model.invoiceDescription
+    dd: view Ember.TextArea value=fields.invoiceDescription
 
   dl
-    input type='submit' value='Save Product Details' click='saveProduct'
+    input type='submit' value='Save New Product' click='createProduct'

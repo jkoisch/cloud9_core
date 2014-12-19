@@ -6,6 +6,7 @@ Cloud9Core.Product = DS.Model.extend
   prices:                     DS.hasMany('price', {async:true})
   status:                     DS.attr 'string'
   notes:                      DS.attr 'string'
+  active:                     DS.attr 'boolean'
   activePrice:                DS.attr 'number'
   invoiceName:                DS.attr 'string'
   invoiceDescription:         DS.attr 'string'

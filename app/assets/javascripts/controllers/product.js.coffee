@@ -5,4 +5,7 @@ Cloud9Core.ProductController = Ember.ObjectController.extend(
 
   actions:
     saveChanges: -> @get('model').save()
+    delete: ->
+      @get('model').destroyRecord().then =>
+      @transitionToRoute 'products'
 )

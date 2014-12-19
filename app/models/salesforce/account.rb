@@ -24,6 +24,9 @@ module Salesforce
     end
 
     def salesforce_data
+      if self.id.nil?
+        self.find
+      end
       @data ||= @client.account(self.id.to_s)
       @data
     end

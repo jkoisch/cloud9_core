@@ -46,5 +46,8 @@ article#product
     view Ember.TextArea value=model.notes
 
   p
+    input type='submit' value='Delete Product' click='delete'
+
+  p
     if showUnsavedMessage
       input type='submit' value='Save Changes' click='saveChanges'

@@ -7,6 +7,8 @@
 #  email              :string(255)
 #  authorized         :boolean
 #  primary            :boolean
+#  name               :string(255)
+#  role               :string(255)
 #
 
 class Cloud9::Contact < ActiveRecord::Base

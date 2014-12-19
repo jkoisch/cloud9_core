@@ -3,11 +3,7 @@
 # Table name: customers
 #
 #  id                :integer          not null, primary key
-#  first_name        :string(255)
-#  last_name         :string(255)
 #  organization_name :string(255)
-#  role              :string(255)
-#  email             :string(255)
 #  created_at        :datetime
 #  updated_at        :datetime
 #  cloud9_identifier :string(255)
@@ -90,6 +86,12 @@ class Cloud9::Customer < ActiveRecord::Base
   #Data resides in Salesforce. This object's reference to the salesforce object base.
   def needs_hug_from_sf
     self.salesforce_reference.blank?
+  end
+
+  def renewal_pending?
+    # Looking for the following two values from salesforce:
+    # Billing_Frequency__c (For example, "Annual")
+    # VS_Renewal_Date__c (A Date .... for example "2014-12-21")
   end
 
 end
