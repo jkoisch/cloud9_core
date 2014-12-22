@@ -3,8 +3,6 @@ Cloud9Core.Router.reopen
   location: 'auto'
 
 Cloud9Core.Router.map ->
-#  @resource 'opportunity', path: '/opportunities/:id', ->
-#    @route 'edit'
   @resource 'opportunities', path: '/opportunities', ->
     @resource 'opportunity', path: '/:id'
     @route 'search', path: '/search'
@@ -13,6 +11,7 @@ Cloud9Core.Router.map ->
   @resource 'systems', path: '/systems', ->
     @resource 'system', path: '/:id'
   @resource 'groups'
+  @resource 'product_types'
   @resource 'products', path: '/products', ->
     @route 'new', path: 'new'
     @resource 'product', path: '/:id', ->

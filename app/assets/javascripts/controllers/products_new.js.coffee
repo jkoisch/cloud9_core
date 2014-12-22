@@ -1,5 +1,5 @@
 Cloud9Core.ProductsNewController = Ember.Controller.extend
-
+  types: null
 
   actions:
 

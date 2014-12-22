@@ -33,7 +33,7 @@ class  Cloud9::Product < ActiveRecord::Base
   accepts_nested_attributes_for :cost_history
   accepts_nested_attributes_for :price_history
 
-  validates_presence_of :name, :description
+  validates_presence_of :name, :description, :product_type_id
 
   after_create :defaults
 
@@ -95,7 +95,8 @@ class  Cloud9::Product < ActiveRecord::Base
   end
 
   def self.ram_id
-    98499
+    type = Cloud9::ProductType.select(:id).find_by(name: "RAM")
+    Cloud9::Product.find_by(:product_type_id => type.id, :active => true, :name.downcase => 'ram')
   end
 
   def self.cpu_id

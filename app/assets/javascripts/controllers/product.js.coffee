@@ -3,6 +3,10 @@ Cloud9Core.ProductController = Ember.ObjectController.extend(
     @get('isDirty') and !@get('isSaving')
   ).property('isDirty', 'isSaving')
 
+  showDeleteButton: ( ->
+    !(@get('isDirty') and !@get('isSaving'))
+  ).property('isDirty', 'isSaving')
+
   actions:
     saveChanges: -> @get('model').save()
     delete: ->

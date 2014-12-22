@@ -24,5 +24,4 @@ class Cloud9::ProductType < ActiveRecord::Base
     default_invoice_names
   end
 
-
 end

@@ -10,6 +10,8 @@ Cloud9Core.Product = DS.Model.extend
   activePrice:                DS.attr 'number'
   invoiceName:                DS.attr 'string'
   invoiceDescription:         DS.attr 'string'
+  #productTypeId:              DS.attr 'number'
+  productType:                DS.belongsTo('productType')
 
 
   formattedCost: (->

@@ -60,6 +60,7 @@ Rails.application.routes.draw do
         resources :costs, shallow: true
         resources :prices, shallow: true
       end
+      resources :product_types
       resources :costs
       resources :prices
       resources :systems do
