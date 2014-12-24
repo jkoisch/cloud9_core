@@ -41,4 +41,12 @@ class Cloud9::Component < ActiveRecord::Base
     return false
   end
 
+  def self.billable(customer)
+    Cloud9::Component.where("customer_id =? AND active = true",customer)
+  end
+
+  def self.billable_by_system(customer,system)
+    billable(customer).where("system_id = ?", system)
+  end
+
 end
