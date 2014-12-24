@@ -17,6 +17,13 @@ article#customer
         link-to 'system' sys.id
           sys.virtualMachineIdentifier
 
+  dl
+    dt Components:
+    each comp in model.components
+      dd
+        if comp.isActive
+          comp.systemLineItem
+
 
 
 

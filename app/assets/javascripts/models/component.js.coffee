@@ -10,6 +10,11 @@ Cloud9Core.ComponentModel = DS.Model.extend
     return @get('quantity') + ' ' + @get('product.invoiceName')
   ).property('quantity','product')
 
+  systemLineItem: (->
+    return @get('system').get('virtualMachineIdentifier') + ' ' + @get('quantity') + ' ' + @get('product' +
+        '.invoiceName')
+  ).property('quantity','product', 'system')
+
   isActive: (->
     @get('active')
   ).property('active')

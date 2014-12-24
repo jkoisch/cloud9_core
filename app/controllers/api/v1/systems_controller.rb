@@ -57,7 +57,7 @@ module Api
           virtual_machine_identifier: sys[:virtual_machine_identifier],
           customer_id: customer_id
         )
-        system.validate_components(sys, system.id)
+        system.validate_components(sys, system.id, customer_id)
         system.update_measurement(sys, system.id) ? system.id : nil
       end
 
