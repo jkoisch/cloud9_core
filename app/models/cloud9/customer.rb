@@ -13,9 +13,9 @@
 # be assigned roles to manage some things in the Cloud9 Universe (add a user, for example)
 class Cloud9::Customer < ActiveRecord::Base
 
-  has_many :cloud9_systems, :class_name => 'Cloud9::System'
-  has_many :cloud9_components, :class_name => 'Cloud9::Component'
-  has_many :cloud9_invoices, :class_name => 'Cloud9::Invoice'
+  has_many :systems, :class_name => 'Cloud9::System'
+  has_many :components, :class_name => 'Cloud9::Component'
+  has_many :invoices, :class_name => 'Cloud9::Invoice'
   has_many :contacts, :class_name => 'Cloud9::Contact', :foreign_key => :cloud9_customer_id
   has_one :salesforce_reference, as: :referenceable
 

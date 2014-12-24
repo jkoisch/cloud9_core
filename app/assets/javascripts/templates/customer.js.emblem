@@ -10,6 +10,13 @@ article#customer
       dd
         con.customerContact
 
+  dl
+    dt Systems:
+    each sys in model.systems
+      dd
+        link-to 'system' sys.id
+          sys.virtualMachineIdentifier
+
 
 
 
