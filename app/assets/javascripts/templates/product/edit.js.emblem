@@ -1,7 +1,7 @@
 article#product
 
 h1
-  model.name
+  model.invoiceName
 
 if showUnsavedEditMessage
     .alert.alert-danger
@@ -14,10 +14,16 @@ if isSaving
 fieldset
   dl
     dt: label Name:
-    dd: input value=model.name
+    dd: view Ember.TextField value=model.name
+  dl
+    dt: label Min Quantity:
+    dd: view Ember.TextField value=model.requiredQuantity
   dl
     dt: label Active:
     dd: view Ember.Checkbox class=toggle checked=model.active
+  dl
+    dt: label Unit?:
+    dd: view Ember.Checkbox class=toggle checked=model.unitPrice
   dl
     dt: label Type:
     dd: view Ember.Select prompt="Select a Type ...." content=types optionValuePath="content.id" optionLabelPath="content.name" selection=model.productType

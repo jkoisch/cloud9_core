@@ -14,7 +14,8 @@ namespace :db do
         name: Faker::Product.product_name,
         description: Faker::HipsterIpsum.words(12).join(' '),
         active: true,
-        status: "staged"
+        status: "staged",
+        product_type_id: 3
       )
 
       c = Cloud9::Cost.create(
@@ -40,7 +41,7 @@ namespace :db do
     end
 
     Cloud9::Product.take(5).each do |p|
-      p.status = "new"
+      p.status = "production"
       p.save!
     end
 

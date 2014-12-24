@@ -22,9 +22,8 @@ article#system
     dt Components
     each comp in components
       dd
-        comp.quantity
-        comp.product.name
-        comp.active
+        if comp.isActive
+          comp.lineItem
   dl
     dt Measurements
     dd Ram | CPU | Total HD | Timestamp

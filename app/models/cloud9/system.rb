@@ -28,7 +28,7 @@ class Cloud9::System < ActiveRecord::Base
 
   def defaults
     if self.components.blank?
-      ['ram', 'cpu', 'hd'].each do |k|
+      ['ram', 'cpu', 'hd_boot'].each do |k|
         id = eval("Cloud9::Product.#{k}_id")
         self.components << Cloud9::Component.new(system_id: self.id, product_id: id)
       end
@@ -44,9 +44,9 @@ class Cloud9::System < ActiveRecord::Base
   end
 
   #TODO encapsulated logic to deal with updating metrics. This should eventually kick off alerts, etc.
-  def update_measurement(sys)
+  def update_measurement(sys, system_id)
     self.measurements << Cloud9::Measurement.new(
-      system_id: sys[:system_id],
+      system_id: system_id,
       raw_metric_data: sys.to_s,
       ram: sys[:ram],
       cpu: sys[:cpu],
@@ -60,6 +60,28 @@ class Cloud9::System < ActiveRecord::Base
       pagefile_location: sys[:pagefile_location]
     )
     self.save
+  end
+
+  #needs to move this into a service
+  def validate_components(sys, system_id)
+    sys.keys.each do |k|
+      prod_id = Cloud9::Product.match_component(k)
+      check_component(prod_id, sys[k], system_id) unless prod_id.nil?
+    end
+  end
+
+  def check_component(prod_id, qty, system_id)
+    comp = Cloud9::Component.find_or_initialize_by(:system_id => system_id, :product_id => prod_id, :active => true)
+    if comp.new_record?
+      comp.quantity = qty
+    else
+      if comp.quantity != qty
+        comp.active = false
+        comp.save
+        comp = Cloud9::Component.find_or_initialize_by(:system_id => system_id, :product_id => prod_id, :active => true, :quantity => qty)
+      end
+    end
+    comp.save!
   end
 
 end

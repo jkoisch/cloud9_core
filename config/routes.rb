@@ -63,6 +63,7 @@ Rails.application.routes.draw do
       resources :product_types
       resources :costs
       resources :prices
+      resources :components
       resources :systems do
         collection do
           post 'measurement'

@@ -10,8 +10,10 @@ Cloud9Core.Product = DS.Model.extend
   activePrice:                DS.attr 'number'
   invoiceName:                DS.attr 'string'
   invoiceDescription:         DS.attr 'string'
-  #productTypeId:              DS.attr 'number'
   productType:                DS.belongsTo('productType')
+  requiredQuantity:           DS.attr 'number'
+  unitPrice:                  DS.attr 'boolean'
+  components:                 DS.hasMany('component', {async:true})
 
 
   formattedCost: (->
@@ -25,5 +27,5 @@ Cloud9Core.Product = DS.Model.extend
   ).property('activePrice')
 
 Cloud9Core.Product.reopenClass
-  STATUSES: ['new', 'staged', 'closed', 'bad']
+  STATUSES: ['new', 'production', 'staged', 'closed', 'bad']
 

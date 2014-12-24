@@ -14,6 +14,9 @@
 #  status              :string(255)
 #  notes               :text
 #  required_quantity   :integer
+#  unit_price          :boolean
+#  percentage_price    :boolean
+#  contract_percentage :integer
 #
 
 #Cloud9::Products can be invoiced against because they have a cost and a price, can be grouped into convenient sets
@@ -95,16 +98,36 @@ class  Cloud9::Product < ActiveRecord::Base
   end
 
   def self.ram_id
-    type = Cloud9::ProductType.select(:id).find_by(name: "RAM")
-    Cloud9::Product.find_by(:product_type_id => type.id, :active => true, :name.downcase => 'ram')
+    unit_pricing("ram", "ram").id
   end
 
   def self.cpu_id
-    98498
+    unit_pricing("cpu", "cpu").id
   end
 
-  def self.hd_id
-    98497
+  def self.hd_boot_id
+    unit_pricing("hard drive","hard drive boot").id
+  end
+
+  def self.hd_data_id
+    unit_pricing("hard drive","hard drive data").id
+  end
+
+  def self.match_component(key)
+    map = map_to_component(key)
+    map.nil? ? nil : Cloud9::Product.find_by(name: map).id
+  end
+
+  private
+  def self.unit_pricing(type, unit)
+    type = Cloud9::ProductType.select(:id).find_by(name: "#{type.downcase}")
+    prod = Cloud9::Product.find_or_create_by(:product_type_id => type.id, :active => true, :name => "#{unit.downcase} unit", :unit_price => true, :status => "production")
+  end
+
+  def self.map_to_component(key)
+    p "KEY!!!!!    " + key
+    matching_hash = {"virtual_machine_identifier" => "ignore","notes" => "ignore","ram"  => "ram unit", "cpu"  => "cpu unit","total_hd_space" => "hard drive boot unit","free_hd_space" => "ignore","average_ram_utilization"  => "ignore","pagefile_size" => "ignore", "dataserver" => "ignore","datastore_location"  => "ignore","pagefile_location" => "ignore","total_users" => "vm user"}
+    matching_hash[key].downcase.eql?("ignore") ? nil : matching_hash[key]
   end
 
 end

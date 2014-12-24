@@ -10,7 +10,7 @@ class Api::V1::ProductsController < ApplicationController
   end
 
   def create
-    respond_with :api, :v1, Cloud9::Product.create(product_params)
+    respond_with Cloud9::Product.create(product_params)
   end
 
   def update
@@ -28,7 +28,8 @@ class Api::V1::ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:name, :active, :description, :notes, :status, :invoice_name, :invoice_description, :product_type_id)
+    params.require(:product).permit(:name, :active, :description, :notes, :status, :invoice_name,
+                                    :invoice_description, :product_type_id, :required_quantity, :unit_price)
   end
 
 

@@ -14,6 +14,7 @@
 class Cloud9::Customer < ActiveRecord::Base
 
   has_many :cloud9_systems, :class_name => 'Cloud9::System'
+  has_many :cloud9_components, :class_name => 'Cloud9::Component'
   has_many :cloud9_invoices, :class_name => 'Cloud9::Invoice'
   has_many :contacts, :class_name => 'Cloud9::Contact', :foreign_key => :cloud9_customer_id
   has_one :salesforce_reference, as: :referenceable

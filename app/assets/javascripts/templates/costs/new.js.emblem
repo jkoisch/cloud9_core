@@ -2,7 +2,7 @@ article#cost
 
 fieldset
   dl
-    dt: label Amount:
+    dt: label Amount (no decimal, like 1234 for $12.34):
     dd: view Ember.TextField value=fields.amount
 
   dl

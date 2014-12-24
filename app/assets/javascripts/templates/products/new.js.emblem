@@ -16,8 +16,8 @@ fieldset
     dt: label Active:
     dd: view Ember.Checkbox class=toggle checked=fields.active
   dl
-    dt: label Type:
-    dd: view Ember.Select content=types optionValuePath="content.id" optionLabelPath="content.name" value=fields.productTypeId prompt="Please select a Type"
+    dt: label Product Type:
+    dd: view Ember.Select prompt="Select a Type ...." content=types optionValuePath="content.id" optionLabelPath="content.name" selection=fields.productType
   dl
     dt: label Invoice Name:
     dd: view Ember.TextField value=fields.invoiceName

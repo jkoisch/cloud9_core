@@ -20,6 +20,7 @@ class Cloud9::Component < ActiveRecord::Base
   belongs_to :product, :class_name => 'Cloud9::Product'
   has_many :requirements, as: :requireable
   belongs_to :system, :class_name => 'Cloud9::System'
+  belongs_to :customer, :class_name => 'Cloud9::Customer'
   has_and_belongs_to_many :cloud9_orders, :class_name => 'Cloud9::Order'
 
   after_save :validate_product_quantity
@@ -27,7 +28,17 @@ class Cloud9::Component < ActiveRecord::Base
   # Products may impose a required quantity on a component; For example, you may have to buy RAM in 4 Gb blocks. This
   # is really just for internal consistency.
   def validate_product_quantity
-    self.quantity = self.product.required_quantity if self.product.present?
+    if self.product.present?
+      if self.quantity.present? && self.product.required_quantity.present?
+        if self.quantity < self.product.required_quantity || self.quantity.nil?
+          self.quantity = self.product.required_quantity unless self.product.required_quantity.nil?
+        end
+      else
+        self.quantity = self.product.required_quantity unless self.product.required_quantity.nil?
+      end
+      return true
+    end
+    return false
   end
 
 end

@@ -14,7 +14,7 @@ RSpec.describe Cloud9::System, :type => :model do
 
     ram = Cloud9::Component.find_by(system_id: sys.id, product_id: Cloud9::Product.ram_id)
     cpu = Cloud9::Component.find_by(system_id: sys.id, product_id: Cloud9::Product.cpu_id)
-    hd = Cloud9::Component.find_by(system_id: sys.id, product_id: Cloud9::Product.hd_id)
+    hd = Cloud9::Component.find_by(system_id: sys.id, product_id: Cloud9::Product.hd_boot_id)
 
     expect(sys.components.length).to eq(3)
     expect(sys.components.include?(ram)).to eq(true)
