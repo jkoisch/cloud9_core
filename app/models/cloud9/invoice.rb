@@ -22,6 +22,11 @@ class Cloud9::Invoice < ActiveRecord::Base
   has_many :invoice_lines, through: :invoice_groups
   belongs_to :cloud9_customer, :class_name => 'Cloud9::Customer'
 
+  def initialize
+    self.stage
+    self.total = 0
+  end
+
   def self.status
     {
         :staged => 100,

@@ -16,4 +16,10 @@ class Cloud9::InvoiceGroup < ActiveRecord::Base
   belongs_to :invoice
   has_many :invoice_lines
 
+  def initialize(_name, _description)
+    self.total = 0
+    self.name = _name
+    self.description = _description
+  end
+
 end

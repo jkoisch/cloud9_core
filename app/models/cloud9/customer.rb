@@ -103,14 +103,36 @@ class Cloud9::Customer < ActiveRecord::Base
 
     invoice = Cloud9::Invoice.new
 
-    total = 0
+    self.systems.each do |sys|
+      group = Cloud9::InvoiceGroup.new("Virtual Machine", sys.virtual_machine_identifier)
 
+      sys.components.each do |comp|
+        line = Cloud9::InvoiceLine.create_from(comp)
+        if line.present?
+          group.invoice_lines << line
+          group.total += line.line_total
+        end
+      end
 
+      invoice.invoice_groups << group if group.invoice_lines.present?
+    end
 
+    self.non_system_components.each do |comp|
+      group = Cloud9::InvoiceGroup.new("Other", comp.product.invoice_name)
+      line = Cloud9::InvoiceLine.create_from(comp)
+      if line.present?
+        group.invoice_lines << line
+        group.total += line.line_total
+      end
 
+      if group.invoice_lines.present?
+        invoice.invoice_groups << group
+        invoice.total += group.total
+      end
+    end
 
-    self.invoices << invioce
-
+    self.invoices << invoice
+    self.save
   end
 
   private

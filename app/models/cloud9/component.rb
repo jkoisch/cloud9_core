@@ -50,4 +50,8 @@ class Cloud9::Component < ActiveRecord::Base
     billable(customer).where("system_id = ?", system)
   end
 
+  def invoice_price
+    self.quantity * self.product.active_price
+  end
+
 end
