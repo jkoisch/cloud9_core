@@ -38,33 +38,53 @@ class Cloud9::Invoice < ActiveRecord::Base
   end
 
   def stage
-    self.state = Cloud9::Invoice.status[:staged]
+    update_status(:staged)
   end
 
   def ready
-    self.state = Cloud9::Invoice.status[:ready]
+    update_status(:ready)
   end
 
-  def send
-    self.state = Cloud9::Invoice.status[:sent]
-    self.bill_date = Time.now
-    self.due_date = 2.weeks.from_now
+  def send_to_user
+    update_status(:sent) do
+      self.bill_date = Time.now
+    end
   end
 
   def pay
-    self.state = Cloud9::Invoice.status[:paid]
-    self.pay_date = Time.now
+    update_status(:paid) do
+      self.pay_date = Time.now
+    end
   end
 
   def error(notes)
-    self.state = Cloud9::Invoice.status[:errored]
-    self.notes += notes
+    update_status(:errored, notes)
   end
 
   def fail(notes)
-    self.state = Cloud9::Invoice.status[:failed]
-    self.notes += notes
-    self.fail_date = Time.now
+    update_status(:failed, notes) do
+      self.fail_date = Time.now
+    end
+  end
+
+  private
+
+  def update_status(_status, notes = nil)
+    self.state = Cloud9::Invoice.status[_status]
+    addend_notes(notes) if notes.present?
+    yield if block_given?
+  end
+
+  def addend_notes(_notes)
+    if self.notes.blank?
+      self.notes = stamp_note(_notes)
+    else
+      self.notes = self.notes + "; " + stamp_note(_notes)
+    end
+  end
+
+  def stamp_note(_notes)
+    "(" + Time.now.to_s + ") #{_notes}"
   end
 
 end
