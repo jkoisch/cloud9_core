@@ -3,7 +3,7 @@ require 'rails_helper'
 
 RSpec.describe Cloud9::Component, :type => :model do
 
-  it "supports a products required quantity" do
+  it "supports a product's required quantity" do
 
     prod = create(:product_with_required_quantity)
     comp = create(:component)

@@ -27,17 +27,18 @@ class Cloud9::System < ActiveRecord::Base
   after_create :defaults
 
   def defaults
-    if self.components.blank?
-      ['ram', 'cpu', 'hd_boot'].each do |k|
-        id = eval("Cloud9::Product.#{k}_id")
-        self.components << Cloud9::Component.new(system_id: self.id, product_id: id)
-      end
-      self.save
-    end
 
     if self.customer.blank?
       cloud9CustomerProfile = Cloud9::Customer.find_by(organization_name: "Cloud9RealTime")
       self.customer_id = cloud9CustomerProfile.id
+      self.save
+    end
+
+    if self.components.blank?
+      ['ram', 'cpu', 'hd_boot'].each do |k|
+        id = eval("Cloud9::Product.#{k}_id")
+        self.components << Cloud9::Component.new(system_id: self.id, product_id: id, customer_id: self.customer_id)
+      end
       self.save
     end
 

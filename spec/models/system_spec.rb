@@ -4,9 +4,13 @@ RSpec.describe Cloud9::System, :type => :model do
 
   it "has a virual_machine_identifier" do
     sys = build(:system)
-
     expect(sys.valid?).to eq(true)
     expect(sys.virtual_machine_identifier).to eq("system_1")
+  end
+
+  it "has a customer" do
+    sys = build(:system)
+    expect(sys.customer.organization_name).to eq('Organization')
   end
 
   it "has basic components instantiated" do

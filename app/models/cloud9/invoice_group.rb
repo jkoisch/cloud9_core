@@ -14,6 +14,6 @@
 class Cloud9::InvoiceGroup < ActiveRecord::Base
 
   belongs_to :invoice
-  has_many :invoice_groups
+  has_many :invoice_lines
 
 end

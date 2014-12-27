@@ -22,4 +22,6 @@ class Cloud9::Invoice < ActiveRecord::Base
   has_many :invoice_lines, through: :invoice_groups
   belongs_to :cloud9_customer, :class_name => 'Cloud9::Customer'
 
+
+
 end

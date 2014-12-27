@@ -17,6 +17,7 @@ ns = Cloud9::Product
 
   FactoryGirl.define do
     factory :product, :class => ns do
+      product_type
       name "product_1"
       description "product_1 description"
     end
@@ -28,8 +29,15 @@ ns = Cloud9::Product
     end
 
     factory :product_with_required_quantity, :class => ns do
+      product_type
       name "product_1"
       description "product_1 description"
       required_quantity 500000000
+    end
+
+    factory :product_for_licensure, :class => ns do
+      product_type
+      name "software license"
+      description "licensure description"
     end
   end

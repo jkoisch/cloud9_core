@@ -28,6 +28,8 @@ class Cloud9::Customer < ActiveRecord::Base
     )
   end
 
+  #Cloud9 uses an internal identifying system. These tie cloud9 information together through systems. Once the identifier is provided, this method asynch retrieves information from salesForce
+  #@params identifier is typically of the form 'rtb####'
   def self.retrieve_by_cloud9_id(identifier)
     cust = Cloud9::Customer.find_or_create_by(cloud9_identifier: identifier)
     if cust.needs_hug_from_sf
@@ -42,6 +44,7 @@ class Cloud9::Customer < ActiveRecord::Base
     end
   end
 
+  #Initializes a Saleforce mapping object (Account) and then calls 'find', which retrieves core SalesForce Information. Also retrieves contacts for the customer
   def update_from_salesforce
     acct = Salesforce::Account.new(account_number: self.cloud9_identifier)
     acct.find
@@ -93,6 +96,17 @@ class Cloud9::Customer < ActiveRecord::Base
     # Looking for the following two values from salesforce:
     # Billing_Frequency__c (For example, "Annual")
     # VS_Renewal_Date__c (A Date .... for example "2014-12-21")
+  end
+
+  private
+
+  #customers have systems with components, and also some components that are not part of any particular system
+  def non_system_components
+    non = []
+    self.components.each do |comp|
+      non << comp if comp.system_id.nil?
+    end
+    non
   end
 
 end

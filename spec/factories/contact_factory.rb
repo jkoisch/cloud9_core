@@ -1,5 +1,4 @@
-# == Schema Information
-#
+
 # Table name: contacts
 #
 #  id                 :integer          not null, primary key
@@ -9,11 +8,14 @@
 #  primary            :boolean
 #  name               :string(255)
 #  role               :string(255)
-#
 
-class Cloud9::Contact < ActiveRecord::Base
+ns = Cloud9::Contact
 
-  belongs_to :customer, :foreign_key => :cloud9_customer_id
-  has_one :salesforce_reference, as: :referenceable
-
+FactoryGirl.define do
+  factory :contact, :class => ns do
+    name "John Doe"
+    role "admin"
+    primary true
+    email "john.doe@johndoes.com"
+  end
 end

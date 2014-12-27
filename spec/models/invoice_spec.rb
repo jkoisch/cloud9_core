@@ -18,6 +18,16 @@ require 'rails_helper'
 RSpec.describe Cloud9::Invoice, :type => :model do
 
   it "has customer information available" do
+    cust = build(:customer)
+
+
+  end
+
+  it "reflects prices of systems" do
+
+  end
+
+  it "reflects prices of components that are not attached to any  system" do
 
   end
 

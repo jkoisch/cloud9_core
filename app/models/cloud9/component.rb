@@ -2,14 +2,15 @@
 #
 # Table name: components
 #
-#  id         :integer          not null, primary key
-#  product_id :integer
-#  notes      :text
-#  system_id  :integer
-#  created_at :datetime
-#  updated_at :datetime
-#  active     :boolean
-#  quantity   :integer
+#  id          :integer          not null, primary key
+#  product_id  :integer
+#  notes       :text
+#  system_id   :integer
+#  created_at  :datetime
+#  updated_at  :datetime
+#  active      :boolean
+#  quantity    :integer
+#  customer_id :integer
 #
 
 #Cloud9::Components have a one to one relationship with a product, can be grouped into orders to be built into
