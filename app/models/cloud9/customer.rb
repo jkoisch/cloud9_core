@@ -101,7 +101,11 @@ class Cloud9::Customer < ActiveRecord::Base
 
   def build_invoice
 
-    invoice = Invoice.new
+    invoice = Cloud9::Invoice.new
+
+    total = 0
+
+
 
 
 

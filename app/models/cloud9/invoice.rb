@@ -25,8 +25,8 @@ class Cloud9::Invoice < ActiveRecord::Base
   def self.status
     {
         :staged => 100,
-        :new => 200,
-        :delivered => 300,
+        :ready => 200,
+        :sent => 300,
         :paid => 400,
         :errored => 500,
         :failed => 999
@@ -35,6 +35,36 @@ class Cloud9::Invoice < ActiveRecord::Base
 
   def self.status_to_s(number)
     Cloud9::Invoice.status.each { |key,val| return key if val == number }
+  end
+
+  def stage
+    self.state = Cloud9::Invoice.status[:staged]
+  end
+
+  def ready
+    self.state = Cloud9::Invoice.status[:ready]
+  end
+
+  def send
+    self.state = Cloud9::Invoice.status[:sent]
+    self.bill_date = Time.now
+    self.due_date = 2.weeks.from_now
+  end
+
+  def pay
+    self.state = Cloud9::Invoice.status[:paid]
+    self.pay_date = Time.now
+  end
+
+  def error(notes)
+    self.state = Cloud9::Invoice.status[:errored]
+    self.notes += notes
+  end
+
+  def fail(notes)
+    self.state = Cloud9::Invoice.status[:failed]
+    self.notes += notes
+    self.fail_date = Time.now
   end
 
 end
