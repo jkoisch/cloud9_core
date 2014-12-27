@@ -11,6 +11,7 @@
 #  updated_at         :datetime
 #
 
+#Cloud9 systems map in any number of ways to Salesforce. This polymorphic record holds that salesforce reference, and a little bit of information about that record on salesforce (the ID and the URL for the RESTful resource)
 class Cloud9::SalesforceReference < ActiveRecord::Base
 
   belongs_to :referenceable, :polymorphic => true

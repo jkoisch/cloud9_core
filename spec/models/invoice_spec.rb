@@ -18,8 +18,8 @@ require 'rails_helper'
 RSpec.describe Cloud9::Invoice, :type => :model do
 
   it "has customer information available" do
-    cust = build(:customer)
-
+    cust = build(:customer_with_spare_components)
+    invoice = cust.build_invoice
 
   end
 

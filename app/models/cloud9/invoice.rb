@@ -22,6 +22,19 @@ class Cloud9::Invoice < ActiveRecord::Base
   has_many :invoice_lines, through: :invoice_groups
   belongs_to :cloud9_customer, :class_name => 'Cloud9::Customer'
 
+  def self.status
+    {
+        :staged => 100,
+        :new => 200,
+        :delivered => 300,
+        :paid => 400,
+        :errored => 500,
+        :failed => 999
+    }
+  end
 
+  def self.status_to_s(number)
+    Cloud9::Invoice.status.each { |key,val| return key if val == number }
+  end
 
 end

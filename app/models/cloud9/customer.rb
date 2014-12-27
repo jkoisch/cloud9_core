@@ -62,6 +62,7 @@ class Cloud9::Customer < ActiveRecord::Base
     self.delay.find_contacts_in_salesforce
   end
 
+  #Finding contacts in salesforce is done by first retrieving account information and then submitting a query to SalesForce (encapsulated in acct.find_contacts)
   def find_contacts_in_salesforce
     acct = Salesforce::Account.new(account_number: self.cloud9_identifier)
     contacts = acct.find_contacts
@@ -96,6 +97,16 @@ class Cloud9::Customer < ActiveRecord::Base
     # Looking for the following two values from salesforce:
     # Billing_Frequency__c (For example, "Annual")
     # VS_Renewal_Date__c (A Date .... for example "2014-12-21")
+  end
+
+  def build_invoice
+
+    invoice = Invoice.new
+
+
+
+    self.invoices << invioce
+
   end
 
   private
