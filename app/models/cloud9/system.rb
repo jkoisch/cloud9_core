@@ -28,7 +28,7 @@ class Cloud9::System < ActiveRecord::Base
 
   def defaults
 
-    if self.customer.blank?
+    if self.customer_id.blank?
       cloud9CustomerProfile = Cloud9::Customer.find_by(organization_name: "Cloud9RealTime")
       self.customer_id = cloud9CustomerProfile.id
       self.save
@@ -44,45 +44,7 @@ class Cloud9::System < ActiveRecord::Base
 
   end
 
-  #TODO encapsulated logic to deal with updating metrics. This should eventually kick off alerts, etc.
-  def update_measurement(sys, system_id)
-    self.measurements << Cloud9::Measurement.new(
-      system_id: system_id,
-      raw_metric_data: sys.to_s,
-      ram: sys[:ram],
-      cpu: sys[:cpu],
-      total_hd_space: sys[:total_hd_space],
-      free_hd_space: sys[:free_hd_space],
-      average_ram_utilization: sys[:average_ram_utilization],
-      total_users: sys[:total_users],
-      pagefile_size: sys[:pagefile_size],
-      dataserver: sys[:dataserver],
-      datastore_location: sys[:datastore_location],
-      pagefile_location: sys[:pagefile_location]
-    )
-    self.save
+  def self.retrieve_by_vm_id(virtual_machine_id, cust_id)
+    Cloud9::System.find_or_create_by(virtual_machine_identifier: virtual_machine_id, customer_id: cust_id)
   end
-
-  #needs to move this into a service
-  def validate_components(sys, system_id, customer_id)
-    sys.keys.each do |k|
-      prod_id = Cloud9::Product.match_component(k)
-      check_component(prod_id, sys[k], system_id, customer_id) unless prod_id.nil?
-    end
-  end
-
-  def check_component(prod_id, qty, system_id, customer_id)
-    comp = Cloud9::Component.find_or_initialize_by(:system_id => system_id, :product_id => prod_id, :active => true, :customer_id => customer_id)
-    if comp.new_record?
-      comp.quantity = qty
-    else
-      if comp.quantity != qty
-        comp.active = false
-        comp.save
-        comp = Cloud9::Component.find_or_initialize_by(:system_id => system_id, :product_id => prod_id, :active => true, :quantity => qty, :customer_id => customer_id)
-      end
-    end
-    comp.save!
-  end
-
 end

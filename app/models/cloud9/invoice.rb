@@ -2,15 +2,17 @@
 #
 # Table name: invoices
 #
-#  id          :integer          not null, primary key
-#  state       :integer
-#  customer_id :integer
-#  total       :integer
-#  fail_date   :datetime
-#  pay_date    :datetime
-#  bill_date   :datetime
-#  created_at  :datetime
-#  updated_at  :datetime
+#  id             :integer          not null, primary key
+#  customer_id    :integer
+#  total          :integer
+#  fail_date      :datetime
+#  pay_date       :datetime
+#  bill_date      :datetime
+#  created_at     :datetime
+#  updated_at     :datetime
+#  notes          :text
+#  error_date     :datetime
+#  workflow_state :integer
 #
 
 #Cloud9 Invoices are just objects that have sub groups (groups and lines) and are tied to many orders for components.
@@ -22,10 +24,7 @@ class Cloud9::Invoice < ActiveRecord::Base
   has_many :invoice_lines, through: :invoice_groups
   belongs_to :cloud9_customer, :class_name => 'Cloud9::Customer'
 
-  def initialize
-    self.stage
-    self.total = 0
-  end
+  after_initialize :stage
 
   def self.status
     {
@@ -38,45 +37,49 @@ class Cloud9::Invoice < ActiveRecord::Base
     }
   end
 
-  def self.status_to_s(number)
-    Cloud9::Invoice.status.each { |key,val| return key if val == number }
+  def workflow_state_to_s
+    Cloud9::Invoice.status.each { |key,val| return key.to_s if val == self.workflow_state }
   end
 
   def stage
-    update_status(:staged)
+    update_status(Cloud9::Invoice.status[:staged]) if self.workflow_state.nil?
+    self.total = 0 if self.total.nil?
   end
 
   def ready
-    update_status(:ready)
+    update_status(Cloud9::Invoice.status[:ready])
   end
 
   def send_to_user
-    update_status(:sent) do
+    update_status(Cloud9::Invoice.status[:sent]) do
       self.bill_date = Time.now
     end
   end
 
-  def pay
-    update_status(:paid) do
+  def pay(_notes = nil)
+    update_status(Cloud9::Invoice.status[:paid]) do
+      addend_payment_reason(_notes)
       self.pay_date = Time.now
     end
   end
 
   def error(notes)
-    update_status(:errored, notes)
+    update_status(Cloud9::Invoice.status[:errored], notes) do
+      self.error_date = Time.now
+    end
   end
 
   def fail(notes)
-    update_status(:failed, notes) do
+    update_status(Cloud9::Invoice.status[:failed], notes) do
       self.fail_date = Time.now
     end
   end
 
   private
 
-  def update_status(_status, notes = nil)
-    self.state = Cloud9::Invoice.status[_status]
-    addend_notes(notes) if notes.present?
+  def update_status(_status, _notes = nil)
+    self.workflow_state = _status
+    addend_notes(_notes) if _notes.present?
     yield if block_given?
   end
 
@@ -84,7 +87,13 @@ class Cloud9::Invoice < ActiveRecord::Base
     if self.notes.blank?
       self.notes = stamp_note(_notes)
     else
-      self.notes = self.notes + "; " + stamp_note(_notes)
+      self.notes += ";  #{stamp_note(_notes)}"
+    end
+  end
+
+  def addend_payment_reason(_notes)
+    if self.notes.present?
+      addend_notes("#{_notes unless _notes.nil?} ... THIS INVOICE PAID AND FINALIZED")
     end
   end
 

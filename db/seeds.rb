@@ -19,3 +19,9 @@ t = Cloud9::Contact.create(
 )
 
 
+['ram', 'cpu', 'hd_boot'].each do |k|
+  eval("Cloud9::Product.#{k}_id")
+end
+
+
+

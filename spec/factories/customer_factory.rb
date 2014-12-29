@@ -9,35 +9,38 @@ FactoryGirl.define do
   factory :customer, :class => ns do
     organization_name 'Organization'
 
-    transient do
-      contact_count 5
-    end
-
-    after(:create) do |customer, evaluator|
-      create_list(:contact, evaluator.contact_count, customer: customer)
-    end
-
-    factory :customer_with_systems do
-
+    factory :customer_with_contacts do
       transient do
-        system_count 5
+        contact_count 5
       end
 
       after(:create) do |customer, evaluator|
-        create_list(:system, evaluator.system_count, customer: customer)
+        create_list(:contact, evaluator.contact_count, customer: customer)
       end
 
-      factory :customer_with_spare_components do
+      factory :customer_with_systems do
+
         transient do
-          component_count 5
+          system_count 5
         end
 
         after(:create) do |customer, evaluator|
-          create_list(:component, evaluator.system_count, customer: customer)
+          create_list(:system, evaluator.system_count, customer: customer)
         end
-      end
 
+        factory :customer_with_spare_components do
+          transient do
+            component_count 5
+          end
+
+          after(:create) do |customer, evaluator|
+            create_list(:component, evaluator.system_count, customer: customer)
+          end
+        end
+
+      end
     end
+
 
   end
 end

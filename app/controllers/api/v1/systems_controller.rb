@@ -1,6 +1,9 @@
 module Api
   module V1
     class SystemsController < ApplicationController
+      include Component
+      include System
+
       skip_before_action :verify_authenticity_token
 
       def index
@@ -21,11 +24,16 @@ module Api
       end
 
       def measurement
-        updated_systems = []
+        measured_systems = []
         customer = check_customer(system_params)
-        params[:system][:measurements].each { |sys| updated_systems << build_system(sys, customer.id) }
-
-        render json: updated_systems
+        @validator = Component::Validating.new
+        @yardstick = System::Measuring.new
+        params[:system][:measurements].each do |sys|
+          system = check_system(sys, customer.id)
+          @validator.call(system.id, customer.id, sys)
+          measured_systems << @yardstick.call(system,sys)
+        end
+        render json: measured_systems
       end
 
       private
@@ -52,18 +60,14 @@ module Api
         Cloud9::System.find(_id)
       end
 
-      def build_system(sys, customer_id)
-        system = Cloud9::System.find_or_create_by(
-          virtual_machine_identifier: sys[:virtual_machine_identifier],
-          customer_id: customer_id
-        )
-        system.validate_components(sys, system.id, customer_id)
-        system.update_measurement(sys, system.id) ? system.id : nil
-      end
-
       def check_customer(sys)
         Cloud9::Customer.retrieve_by_cloud9_id(sys[:cloud9_id])
       end
+
+      def check_system(sys, customer_id)
+        Cloud9::System.retrieve_by_vm_id(sys[:virtual_machine_identifier], customer_id)
+      end
+
 
     end
   end

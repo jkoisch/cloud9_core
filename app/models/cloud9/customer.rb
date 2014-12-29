@@ -12,6 +12,7 @@
 #A CLoud9::Customer is a first class object that has many systems, will manage contact and payment information, will
 # be assigned roles to manage some things in the Cloud9 Universe (add a user, for example)
 class Cloud9::Customer < ActiveRecord::Base
+  include Concerns::Salesforceable
 
   has_many :systems, :class_name => 'Cloud9::System'
   has_many :components, :class_name => 'Cloud9::Component'
@@ -38,11 +39,7 @@ class Cloud9::Customer < ActiveRecord::Base
     cust
   end
 
-  def initialize_from_salesforce
-    if self.needs_hug_from_sf
-      update_from_salesforce
-    end
-  end
+
 
   #Initializes a Saleforce mapping object (Account) and then calls 'find', which retrieves core SalesForce Information. Also retrieves contacts for the customer
   def update_from_salesforce
@@ -88,54 +85,15 @@ class Cloud9::Customer < ActiveRecord::Base
     end
   end
 
-  #Data resides in Salesforce. This object's reference to the salesforce object base.
-  def needs_hug_from_sf
-    self.salesforce_reference.blank?
-  end
-
   def renewal_pending?
     # Looking for the following two values from salesforce:
     # Billing_Frequency__c (For example, "Annual")
     # VS_Renewal_Date__c (A Date .... for example "2014-12-21")
   end
 
-  def build_invoice
-
-    invoice = Cloud9::Invoice.new
-
-    self.systems.each do |sys|
-      group = Cloud9::InvoiceGroup.new("Virtual Machine", sys.virtual_machine_identifier)
-
-      sys.components.each do |comp|
-        line = Cloud9::InvoiceLine.create_from(comp)
-        if line.present?
-          group.invoice_lines << line
-          group.total += line.line_total
-        end
-      end
-
-      invoice.invoice_groups << group if group.invoice_lines.present?
-    end
-
-    self.non_system_components.each do |comp|
-      group = Cloud9::InvoiceGroup.new("Other", comp.product.invoice_name)
-      line = Cloud9::InvoiceLine.create_from(comp)
-      if line.present?
-        group.invoice_lines << line
-        group.total += line.line_total
-      end
-
-      if group.invoice_lines.present?
-        invoice.invoice_groups << group
-        invoice.total += group.total
-      end
-    end
-
-    self.invoices << invoice
-    self.save
+  def last_sent_invoice
+    self.invoices.where(:status => Cloud9::Invoice.status[:sent]).last
   end
-
-  private
 
   #customers have systems with components, and also some components that are not part of any particular system
   def non_system_components

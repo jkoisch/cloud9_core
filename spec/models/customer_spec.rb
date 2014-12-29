@@ -8,7 +8,7 @@ RSpec.describe Cloud9::Customer, :type => :model do
   end
 
   it "has contacts associated with it" do
-    cust = create(:customer)
+    cust = create(:customer_with_contacts)
     expect(cust.contacts.length).to eq(5)
     expect(cust.contacts[0].email).to eq("john.doe@johndoes.com")
   end
@@ -33,5 +33,6 @@ RSpec.describe Cloud9::Customer, :type => :model do
     cust = create(:customer_with_spare_components)
     expect(cust.non_system_components[0].is_a?(Cloud9::Component)).to be(true)
   end
+
 
 end
