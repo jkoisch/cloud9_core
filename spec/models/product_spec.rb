@@ -26,6 +26,13 @@ RSpec.describe Cloud9::Product, :type => :model do
     expect(prod.description).to eq('product_1 description')
   end
 
+  it "has a price" do
+    prod = create(:product)
+    prod.prices[0].active = true
+    expect(prod.active_price).to be > 0
+    expect(prod.prices[0].amount.is_a?(Integer)).to be(true)
+  end
+
   it "gets the defaults set for invoice items" do
     prod = create(:product)
 

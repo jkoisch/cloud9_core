@@ -29,7 +29,7 @@ class Api::V1::ProductsController < ApplicationController
 
   def product_params
     params.require(:product).permit(:name, :active, :description, :notes, :status, :invoice_name,
-                                    :invoice_description, :product_type_id, :required_quantity, :unit_price)
+                                    :invoice_description, :product_type_id, :required_quantity,:unit_price)
   end
 
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141229202557) do
+ActiveRecord::Schema.define(version: 20141230070458) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -89,9 +89,9 @@ ActiveRecord::Schema.define(version: 20141229202557) do
   create_table "invoice_lines", force: true do |t|
     t.integer "invoice_group_id"
     t.integer "line_total"
-    t.integer "count"
     t.string  "name"
     t.text    "description"
+    t.integer "count",            limit: 8
   end
 
   create_table "invoices", force: true do |t|

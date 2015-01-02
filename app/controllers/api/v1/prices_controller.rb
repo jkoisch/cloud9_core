@@ -6,7 +6,8 @@ class Api::V1::PricesController < ApplicationController
   end
 
   def create
-    p = Cloud9::Price.create(price_params)
+    p = Cloud9::Price.create(active: price_params[:active], product_id: price_params[:product_id], amount:
+                                     price_params[:amount])
     activate_price p
     render json: p
   end
@@ -14,7 +15,7 @@ class Api::V1::PricesController < ApplicationController
   private
 
   def price_params
-    params.require(:price).permit(:active, :id, :amount, :product_id, :activate_date)
+    params.require(:price).permit(:active, :id, :amount, :product_id)
   end
 
   def price

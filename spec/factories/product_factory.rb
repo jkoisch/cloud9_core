@@ -20,6 +20,16 @@ ns = Cloud9::Product
       product_type
       name "product_1"
       description "product_1 description"
+
+      transient do
+        count 5
+      end
+
+      after(:create) do |product, evaluator|
+        create_list(:price, evaluator.count, product: product)
+        create_list(:costs, evaluator.count, product: product)
+      end
+
     end
 
     factory :product_category, :class => ns do

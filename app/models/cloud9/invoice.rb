@@ -20,9 +20,9 @@
 class Cloud9::Invoice < ActiveRecord::Base
 
   has_many :orders
-  has_many :invoice_groups
-  has_many :invoice_lines, through: :invoice_groups
-  belongs_to :cloud9_customer, :class_name => 'Cloud9::Customer'
+  has_many :invoice_groups, :class_name => "Cloud9::InvoiceGroup"
+  has_many :invoice_lines, through: :invoice_groups, :class_name => "Cloud9::InvoiceLine"
+  belongs_to :customer, :class_name => 'Cloud9::Customer'
 
   after_initialize :stage
 
@@ -72,6 +72,24 @@ class Cloud9::Invoice < ActiveRecord::Base
   def fail(notes)
     update_status(Cloud9::Invoice.status[:failed], notes) do
       self.fail_date = Time.now
+    end
+  end
+
+  self.class_eval do
+    %w[components systems].each do |key|
+
+      define_method(key) do
+        if instance_variable_defined?("@#{key}")
+          instance_variable_get("@#{key}")
+        else
+          instance_variable_set("@#{key}", [])
+        end
+      end
+
+      define_method("#{key}s<<") do |val|
+        eval("@#{key} << #{val}")
+      end
+
     end
   end
 

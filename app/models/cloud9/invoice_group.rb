@@ -13,13 +13,16 @@
 
 class Cloud9::InvoiceGroup < ActiveRecord::Base
 
-  belongs_to :invoice
-  has_many :invoice_lines
+  attr_reader :description, :name, :total
 
-  def initialize(_name, _description)
+  belongs_to :invoice, :class_name => "Cloud9::Invoice"
+  has_many :invoice_lines, :class_name => "Cloud9::InvoiceLine"
+
+  def initialize(options = {})
+    super
     self.total = 0
-    self.name = _name
-    self.description = _description
+    self.name = options[:name]
+    self.description = options[:description]
   end
 
 end

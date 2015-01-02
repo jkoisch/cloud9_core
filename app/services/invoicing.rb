@@ -10,40 +10,50 @@ class Invoicing
   end
 
   def call
-
     invoice = Cloud9::Invoice.new
+    invoice.total = 0
 
     @customer.systems.each do |sys|
-      group = Cloud9::InvoiceGroup.new("Virtual Machine", sys.virtual_machine_identifier)
+      invoice.systems << sys
+      group = Cloud9::InvoiceGroup.new(:name => "Virtual Machine", :description => sys.virtual_machine_identifier)
 
+      group_total = 0
       sys.components.each do |comp|
         line = Cloud9::InvoiceLine.create_from(comp)
         if line.present?
           group.invoice_lines << line
-          group.total += line.line_total
+          group_total += line.line_total.to_i
         end
       end
 
+      group.total = group_total
+      invoice.total += group_total
       invoice.invoice_groups << group if group.invoice_lines.present?
     end
 
     @customer.non_system_components.each do |comp|
-      group = Cloud9::InvoiceGroup.new("Other", comp.product.invoice_name)
+      invoice.components << comp
+      group = Cloud9::InvoiceGroup.new(:name => "Other", :description => comp.product.invoice_name)
+
+      group_total = 0
       line = Cloud9::InvoiceLine.create_from(comp)
       if line.present?
         group.invoice_lines << line
-        group.total += line.line_total
+        group_total += line.line_total.to_i
       end
 
       if group.invoice_lines.present?
+        group.total = group_total
         invoice.invoice_groups << group
-        invoice.total += group.total
       end
+
+      invoice.total += group_total
     end
 
+    invoice.ready
     @customer.invoices << invoice
     @customer.save
-
+    invoice
   end
 
 

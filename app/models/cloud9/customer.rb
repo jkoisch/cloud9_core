@@ -39,8 +39,6 @@ class Cloud9::Customer < ActiveRecord::Base
     cust
   end
 
-
-
   #Initializes a Saleforce mapping object (Account) and then calls 'find', which retrieves core SalesForce Information. Also retrieves contacts for the customer
   def update_from_salesforce
     acct = Salesforce::Account.new(account_number: self.cloud9_identifier)

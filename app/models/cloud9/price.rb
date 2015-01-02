@@ -15,7 +15,9 @@
 class Cloud9::Price < ActiveRecord::Base
   belongs_to :product
 
-  def active_date
+  attr_accessor :active
+
+  def activate_date
     self.updated_at
   end
 end

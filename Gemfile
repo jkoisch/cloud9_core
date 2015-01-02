@@ -17,7 +17,6 @@ gem 'annotate'
 gem 'restforce'
 gem 'figaro'
 gem 'active_model_serializers'
-gem 'passenger'
 gem 'delayed_job_active_record'
 
 gem 'rspec-rails', '~>3.0.0' ,:group => [:test, :development]
@@ -30,12 +29,17 @@ group :test do
 end
 
 group :development do
-  #gem 'thin'
+  gem 'thin'
   gem 'spring'
   gem 'pry'
   gem 'better_errors'
   gem 'binding_of_caller'
 end
+
+group :production, :test do
+  gem 'passenger'
+end
+
 
 gem 'haml-rails'
 gem 'sass-rails', '~> 4.0.3'

@@ -48,6 +48,10 @@ class  Cloud9::Product < ActiveRecord::Base
   def active_cost
     if self.cost_history.length > 0
       i = self.cost_history.find_index { |f| (f.active == true)}
+      if i.nil?
+        activate_cost(self.cost_history.last)
+        i = self.cost_history.find_index { |f| (f.active == true)}
+      end
       self.cost_history[i].amount
     else
       0
@@ -57,7 +61,11 @@ class  Cloud9::Product < ActiveRecord::Base
   # Determines the active price for this product
   def active_price
     if self.price_history.length > 0
-      i = self.price_history.find_index { |f| (f.active == true)}
+      i = self.price_history.find_index { |f| f.active }
+      if i.nil?
+        activate_price(self.price_history.last)
+        i = self.price_history.find_index { |f| f.active }
+      end
       self.price_history[i].amount
     else
       0
@@ -125,8 +133,8 @@ class  Cloud9::Product < ActiveRecord::Base
   end
 
   def self.map_to_component(key)
-    p "KEY!!!!!    " + key
     matching_hash = {"virtual_machine_identifier" => "ignore","notes" => "ignore","ram"  => "ram unit", "cpu"  => "cpu unit","total_hd_space" => "hard drive boot unit","free_hd_space" => "ignore","average_ram_utilization"  => "ignore","pagefile_size" => "ignore", "dataserver" => "ignore","datastore_location"  => "ignore","pagefile_location" => "ignore","total_users" => "vm user"}
+    p "MATCH!!!!!!     " +  matching_hash[key]
     matching_hash[key].downcase.eql?("ignore") ? nil : matching_hash[key]
   end
 

@@ -47,4 +47,8 @@ class Cloud9::System < ActiveRecord::Base
   def self.retrieve_by_vm_id(virtual_machine_id, cust_id)
     Cloud9::System.find_or_create_by(virtual_machine_identifier: virtual_machine_id, customer_id: cust_id)
   end
+
+  def active_components
+    self.components.where(:active => true)
+  end
 end

@@ -34,7 +34,7 @@ FactoryGirl.define do
           end
 
           after(:create) do |customer, evaluator|
-            create_list(:component, evaluator.system_count, customer: customer)
+            create_list(:component, evaluator.component_count, customer: customer)
           end
         end
 

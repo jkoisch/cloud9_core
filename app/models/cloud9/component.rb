@@ -42,6 +42,15 @@ class Cloud9::Component < ActiveRecord::Base
     return false
   end
 
+  def initialize(options = {})
+    super
+    self.system_id = options[:system_id]
+    self.product_id = options[:product_id]
+    self.customer_id = options[:customer_id]
+    self.active = options[:active]
+    self.quantity = options[:quantity]
+  end
+
   def self.billable(customer)
     Cloud9::Component.where("customer_id =? AND active = true",customer)
   end
@@ -51,7 +60,20 @@ class Cloud9::Component < ActiveRecord::Base
   end
 
   def invoice_price
-    self.quantity * self.product.active_price
+    if self.quantity.present? && self.product.active_price.present?
+      self.unit_quantity * self.product.active_price
+    else
+      0
+    end
+  end
+
+  def unit_quantity
+    gig = 1000000000
+    if self.product.name.include?("hard drive")
+      self.quantity / gig
+    else
+      self.quantity
+    end
   end
 
 end
