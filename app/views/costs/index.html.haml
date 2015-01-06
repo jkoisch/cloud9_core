@@ -1,0 +1,19 @@
+%h1 Listing cloud9_costs
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+      
+  %tbody
+    - @cloud9_costs.each do |cloud9_cost|
+      %tr
+        %td= link_to 'Show', cloud9_cost
+        %td= link_to 'Edit', edit_cloud9_cost_path(cloud9_cost)
+        %td= link_to 'Destroy', cloud9_cost, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Cost', new_cloud9_cost_path

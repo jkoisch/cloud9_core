@@ -1,5 +1,5 @@
 Cloud9Core.ProductsController = Ember.ArrayController.extend
-  sortProperties: ['name'],
+  sortProperties: ['productTypeId'],
   sortAscending: true
 
   actions:

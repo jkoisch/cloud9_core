@@ -33,6 +33,7 @@ class Cloud9::Invoice < ActiveRecord::Base
         :sent => 300,
         :paid => 400,
         :errored => 500,
+        :sampled => 700,
         :failed => 999
     }
   end
@@ -48,6 +49,10 @@ class Cloud9::Invoice < ActiveRecord::Base
 
   def ready
     update_status(Cloud9::Invoice.status[:ready])
+  end
+
+  def sample
+    update_status(Cloud9::Invoice.status[:sample])
   end
 
   def send_to_user

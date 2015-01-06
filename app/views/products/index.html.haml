@@ -1,0 +1,19 @@
+%h1 Listing cloud9_products
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+      
+  %tbody
+    - @cloud9_products.each do |cloud9_product|
+      %tr
+        %td= link_to 'Show', cloud9_product
+        %td= link_to 'Edit', edit_cloud9_product_path(cloud9_product)
+        %td= link_to 'Destroy', cloud9_product, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Product', new_cloud9_product_path

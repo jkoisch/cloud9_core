@@ -1,0 +1,19 @@
+%h1 Listing cloud9_measurements
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+      
+  %tbody
+    - @cloud9_measurements.each do |cloud9_measurement|
+      %tr
+        %td= link_to 'Show', cloud9_measurement
+        %td= link_to 'Edit', edit_cloud9_measurement_path(cloud9_measurement)
+        %td= link_to 'Destroy', cloud9_measurement, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Measurement', new_cloud9_measurement_path

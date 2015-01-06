@@ -1,0 +1,16 @@
+%h1 Listing Systems
+
+%table
+  %thead
+    %tr
+      %th= "Virtual Machine Name"
+
+      
+  %tbody
+    - @cloud9_systems.each do |cloud9_system|
+      %tr
+        %td= link_to cloud9_system.virtual_machine_identifier, edit_system_path(cloud9_system)
+
+%br
+
+= link_to 'New System', new_system_path

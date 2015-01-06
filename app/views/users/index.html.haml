@@ -1,0 +1,19 @@
+%h1 Listing cloud9_users
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+      
+  %tbody
+    - @cloud9_users.each do |cloud9_user|
+      %tr
+        %td= link_to 'Show', cloud9_user
+        %td= link_to 'Edit', edit_cloud9_user_path(cloud9_user)
+        %td= link_to 'Destroy', cloud9_user, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New User', new_cloud9_user_path

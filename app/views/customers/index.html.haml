@@ -1,0 +1,19 @@
+%h1 Listing cloud9_customers
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+      
+  %tbody
+    - @cloud9_customers.each do |cloud9_customer|
+      %tr
+        %td= link_to 'Show', cloud9_customer
+        %td= link_to 'Edit', edit_cloud9_customer_path(cloud9_customer)
+        %td= link_to 'Destroy', cloud9_customer, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Customer', new_cloud9_customer_path

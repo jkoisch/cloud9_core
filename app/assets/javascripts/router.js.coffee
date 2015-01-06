@@ -3,11 +3,14 @@ Cloud9Core.Router.reopen
   location: 'auto'
 
 Cloud9Core.Router.map ->
+  @resource 'invoices', path: '/invoices', ->
+    @resource 'invoice', path: '/:id'
   @resource 'opportunities', path: '/opportunities', ->
     @resource 'opportunity', path: '/:id'
     @route 'search', path: '/search'
   @resource 'customers', path: '/customers', ->
-    @resource 'customer', path: '/:id'
+    @resource 'customer', path: '/:id',
+      @resource 'invoice', path: '/invoices'
   @resource 'systems', path: '/systems', ->
     @resource 'system', path: '/:id'
   @resource 'groups'

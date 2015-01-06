@@ -1,0 +1,19 @@
+%h1 Listing cloud9_invoices
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+      
+  %tbody
+    - @cloud9_invoices.each do |cloud9_invoice|
+      %tr
+        %td= link_to 'Show', cloud9_invoice
+        %td= link_to 'Edit', edit_cloud9_invoice_path(cloud9_invoice)
+        %td= link_to 'Destroy', cloud9_invoice, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Invoice', new_cloud9_invoice_path

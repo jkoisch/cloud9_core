@@ -1,0 +1,10 @@
+= form_for @cloud9_component do |f|
+  - if @cloud9_component.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@cloud9_component.errors.count, "error")} prohibited this cloud9_component from being saved:"
+      %ul
+        - @cloud9_component.errors.full_messages.each do |msg|
+          %li= msg
+
+  .actions
+    = f.submit 'Save'

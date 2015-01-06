@@ -1,0 +1,30 @@
+= form_for @cloud9_system, :url => system_path do |f|
+  - if @cloud9_system.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@cloud9_system.errors.count, 'error')} prohibited this cloud9_system from being saved:"
+      %ul
+        - @cloud9_system.errors.full_messages.each do |msg|
+          %li= msg
+
+  %table
+    %tr
+      %th= "Organization"
+      %th= "Contacts"
+      %th= "Updated"
+      %th= "Components"
+    %tr
+      %td= link_to @cloud9_system.customer.organization_name, customer_path(@cloud9_system.customer)
+      %td
+        %table
+          - @cloud9_system.customer.contacts.each do |con|
+            %tr
+              %td= "#{con.name} (#{con.email})"
+      %td= @cloud9_system.updated_at
+      %td
+        %table
+          - @cloud9_system.active_components.each do |comp|
+            %tr
+              %td= "#{comp.product.invoice_name} - #{comp.quantity}"
+
+  .actions
+    = f.submit 'Save'

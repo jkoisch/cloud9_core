@@ -1,0 +1,19 @@
+%h1 Listing cloud9_components
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+      
+  %tbody
+    - @cloud9_components.each do |cloud9_component|
+      %tr
+        %td= link_to 'Show', cloud9_component
+        %td= link_to 'Edit', edit_cloud9_component_path(cloud9_component)
+        %td= link_to 'Destroy', cloud9_component, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Component', new_cloud9_component_path

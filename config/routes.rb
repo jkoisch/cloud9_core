@@ -63,6 +63,7 @@ Rails.application.routes.draw do
       resources :product_types
       resources :costs
       resources :prices
+      resources :invoices
       resources :components
       resources :systems do
         collection do
@@ -73,6 +74,7 @@ Rails.application.routes.draw do
       resources :customers do
         resources :components, shallow: true
         resources :measurements, shallow: true
+        resources :invoices, shallow: true
       end
 
     end
@@ -84,9 +86,9 @@ Rails.application.routes.draw do
     end
   end
 
-  get "dashboard/index"
-
+  resources :systems
+  resources :customers
   #root :to => 'dashboard#index'
   root to: 'home#index'
-  get '*path', to: 'home#index'
+  # get '*path', to: 'home#index'
 end
