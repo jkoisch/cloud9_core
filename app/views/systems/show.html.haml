@@ -1,6 +1,32 @@
 %p#notice= notice
 
+%h3= @cloud9_system.vm.upcase
 
-= link_to 'Edit', edit_system_path(@cloud9_system)
-\|
-= link_to 'Back', systems_path
+%table.table-bordered.table-hover
+  %tr.success
+    %th= "Organization"
+    %th= "Measurements"
+    %th= "Components"
+    %th= "Recent Update"
+  %tr
+    %td
+      %table.table-hover
+        %tr.success
+          %td= link_to @cloud9_system.customer.organization_name, customer_path(@cloud9_system.customer)
+        %tr
+          %td
+            - @cloud9_system.customer.systems.each do |sys|
+              =link_to sys.vm, system_path(sys), :class => 'btn btn-mini'
+    %td
+      %table.table-hover
+        - @cloud9_system.measurements.each do |mea|
+          %tr.success
+            %td= "#{mea.creation_date_fmt}: #{mea.ram} | #{mea.cpu} | #{mea.total_hd_space} "
+    %td
+      %table.table-hover
+        - @cloud9_system.active_components.each do |comp|
+          %tr.success
+            %td= "#{comp.product.invoice_name.capitalize}s - #{comp.quantity}"
+    %td= @cloud9_system.recent_update
+
+= link_to 'All Systems', systems_path, :class => 'btn btn-small btn-info'

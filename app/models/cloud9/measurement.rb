@@ -24,4 +24,8 @@ class Cloud9::Measurement < ActiveRecord::Base
 
   belongs_to :cloud9_system, :class_name => 'Cloud9::System'
 
+  def creation_date_fmt
+    self.created_at.strftime '%m-%d-%C-%HH'
+  end
+
 end

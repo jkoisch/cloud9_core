@@ -1,19 +1,21 @@
-%h1 Listing cloud9_products
+%h1 Products Listing
 
-%table
+%table.table-bordered.table-hover
   %thead
     %tr
-      %th
-      %th
-      %th
+      %th Type
+      %th Product
+      %th Delete?
       
   %tbody
+    - prev_name = ''
     - @cloud9_products.each do |cloud9_product|
       %tr
-        %td= link_to 'Show', cloud9_product
-        %td= link_to 'Edit', edit_cloud9_product_path(cloud9_product)
-        %td= link_to 'Destroy', cloud9_product, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %td= cloud9_product.product_type.name.capitalize.eql?(prev_name) ? '' : cloud9_product.product_type.name.capitalize
+        %td= link_to cloud9_product.invoice_name.capitalize, edit_product_path(cloud9_product)
+        %td= link_to 'Remove', product_path(cloud9_product), :method => :delete, :class => 'btn btn-danger btn-mini',:data => { :confirm => 'Are you sure?' }
+      - prev_name = cloud9_product.product_type.name.capitalize
 
 %br
 
-= link_to 'New Product', new_cloud9_product_path
+= link_to 'New Product', new_product_path

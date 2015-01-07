@@ -6,3 +6,7 @@ html, body {
 .ember-text-field, .ember-text-area {
     width: 100%;
 }
+
+.centered {
+    align: 'center'
+}

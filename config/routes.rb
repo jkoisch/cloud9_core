@@ -88,6 +88,7 @@ Rails.application.routes.draw do
 
   resources :systems
   resources :customers
+  resources :products
   #root :to => 'dashboard#index'
   root to: 'home#index'
   # get '*path', to: 'home#index'

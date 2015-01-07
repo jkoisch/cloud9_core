@@ -26,6 +26,10 @@ class Cloud9::System < ActiveRecord::Base
 
   after_create :defaults
 
+  def vm
+    self.virtual_machine_identifier
+  end
+
   def defaults
 
     if self.customer_id.blank?
@@ -51,4 +55,10 @@ class Cloud9::System < ActiveRecord::Base
   def active_components
     self.components.where(:active => true)
   end
+
+  def recent_update
+    self.measurements.last.created_at.strftime '%c'
+  end
+
+
 end

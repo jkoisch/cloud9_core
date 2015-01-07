@@ -1,6 +1,34 @@
 %p#notice= notice
 
+%h3= @cloud9_customer.organization_name
 
-= link_to 'Edit', edit_cloud9_customer_path(@cloud9_customer)
-\|
-= link_to 'Back', cloud9_customers_path
+%table.table-bordered.table-hover
+    %tr.success
+        %td
+            %strong= "Contacts"
+        %td
+            %strong= "Systems"
+        %td
+            %strong= "Components"
+    %tr
+        %td
+            %table
+                %tr
+                    %td
+                        %ul
+                        - @cloud9_customer.contacts.each do |con|
+                            %li= con.display_name
+        %td
+            %table
+                %tr
+                    %td
+                        %ul
+                        - @cloud9_customer.systems.each do |sys|
+                            %li=link_to sys.vm, system_path(sys), :class => 'btn btn-mini'
+        %td
+            %table
+                %tr
+                    %td
+                        %ul
+                        - @cloud9_customer.non_system_components.each do |comp|
+                            %li = "#{comp.product.name}"

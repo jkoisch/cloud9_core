@@ -8,6 +8,18 @@
 </head>
 <body>
 
+<div class="navbar">
+  <div class="navbar-inner">
+    <a class="brand" href="#">Cloud9 Automation</a>
+    <ul class="nav">
+      <li><%=link_to 'Products', products_path %></li>
+      <li><%=link_to 'Customers', customers_path %></li>
+      <li><%=link_to 'Systems', systems_path %></li>
+    </ul>
+
+  </div>
+</div>
+
 <%= yield %>
 
 <!--<div id="ember-app"></div>-->

@@ -1,16 +1,16 @@
 %h1 Listing Systems
 
-%table
+%table.table-bordered.table-hover
   %thead
     %tr
       %th= "Virtual Machine Name"
+      %th= "Measurements"
+      %th= "Last Updated"
 
       
   %tbody
     - @cloud9_systems.each do |cloud9_system|
       %tr
-        %td= link_to cloud9_system.virtual_machine_identifier, edit_system_path(cloud9_system)
-
-%br
-
-= link_to 'New System', new_system_path
+        %td= link_to cloud9_system.vm, system_path(cloud9_system), :class => 'btn btn-mini'
+        %td.centered
+          = link_to cloud9_system.measurements.count.to_s, system_path(cloud9_system)
