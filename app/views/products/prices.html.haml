@@ -1,0 +1,34 @@
+%h1
+  = "Editing Prices: #{@cloud9_product.invoice_name.capitalize}"
+
+= form_for @cloud9_product, :url => product_path do |f|
+  - if @cloud9_product.errors.any?
+    #error_explanation
+    %h2= "#{pluralize(@cloud9_product.errors.count, "error")} prohibited this cloud9_product from being saved:"
+    %ul
+      - @cloud9_product.errors.full_messages.each do |msg|
+        %li= msg
+
+  %fieldset
+    %table.table-bordered
+      %tr
+        %th= "Add Price (in $0.01; 1000 = $10.00)"
+        %th
+      %tr
+        %td
+          = f.text_field :active_price
+          %br
+          = f.submit "Update", :class => 'btn btn-small btn-success'
+        %td
+      %tr
+        %th= "Historical Prices"
+      %tr
+        %td
+          %table
+            %tr
+              %th= "Amt"
+              %th= "Effective Date"
+            - @cloud9_product.prices.each do |p|
+              %tr
+                %td= "#{format_pennies(p.amount)}"
+                %td= "#{p.created_at.strftime '%c'}"

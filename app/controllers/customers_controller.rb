@@ -22,8 +22,8 @@ class CustomersController < ApplicationController
 
   def simulate_invoice
     @cloud9_customer = customer
-    Invoicing.new(@cloud9_customer).call
-    @invoice = @cloud9_customer.invoices(true).last
+    sim = Invoicing.new(@cloud9_customer)
+    @invoice = sim.sample
   end
 
   private

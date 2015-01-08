@@ -56,5 +56,12 @@ class Invoicing
     invoice
   end
 
+  def sample
+    invoice = self.call
+    invoice.sample
+    invoice.save
+    invoice
+  end
+
 
 end

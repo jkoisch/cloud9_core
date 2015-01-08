@@ -41,12 +41,12 @@
                     %th= "Bill Date"
                     %th= "Total"
                     %th= "Status"
-                - @cloud9_customer.invoices.each do |inv|
+                - @cloud9_customer.active_invoices.each do |inv|
                     %tr
                         %td
                             = link_to inv.created_at.strftime('%c'), invoice_path(inv)
                         %td= inv.bill_date.strftime '%c' unless inv.bill_date.blank?
                         %td= format_pennies(inv.total)
-                        %td= inv.workflow_state
+                        %td= inv.workflow_state_to_s.capitalize
         %td= link_to "Simulate Invoice", simulate_invoice_customer_path(@cloud9_customer), :class => 'btn btn-small'
 

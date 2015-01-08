@@ -102,4 +102,8 @@ class Cloud9::Customer < ActiveRecord::Base
     non
   end
 
+  def active_invoices
+    self.invoices.where('workflow_state NOT IN (700,200)')
+  end
+
 end
