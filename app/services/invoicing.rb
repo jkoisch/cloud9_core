@@ -25,10 +25,9 @@ class Invoicing
           group_total += line.line_total.to_i
         end
       end
-
       group.total = group_total
-      invoice.total += group_total
-      invoice.invoice_groups << group if group.invoice_lines.present?
+      invoice.total += group.total
+      invoice.invoice_groups << group
     end
 
     @customer.non_system_components.each do |comp|
@@ -47,7 +46,7 @@ class Invoicing
         invoice.invoice_groups << group
       end
 
-      invoice.total += group_total
+      invoice.total += group.total
     end
 
     invoice.ready

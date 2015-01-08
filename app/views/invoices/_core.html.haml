@@ -9,8 +9,8 @@
 			%table
 				-@invoice.invoice_groups.each do |grp|
 					%tr
-						%td= "RRRRR #{grp.name}"
-						%td= grp.description
+						%td= grp[:name]
+						%td= grp[:description].upcase
 						%td
 						%td
 					%tr
@@ -20,15 +20,18 @@
 							%table
 								-grp.invoice_lines.each do |line|
 									%tr
-										%td= line.name
-										%td= "Count: #{line.count}"
-										%td= line.description
+										%td= line[:name]
+										%td= "Count: #{line[:count]}"
+										%td= line[:description]
 										%td
-										%td= format_pennies(line.line_total)
+										%td= format_pennies(line[:line_total])
 					%tr
 						%td= "Sub Total"
 						%td
 						%td
 						%td= format_pennies(grp.total)
 	%tr
+		%td= "TOTAL:"
+		%td
+		%td
 		%td= format_pennies(@invoice.total)

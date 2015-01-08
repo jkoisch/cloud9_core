@@ -1,8 +1,15 @@
-class InvoicesController
+class InvoicesController < ApplicationController
   # Type stuff here
 
   def show
-    @opportunity = SalesForce::Opportunity.new(:id => params[:id])
-
+    invoice
   end
+
+
+
+  private
+
+    def invoice
+      @invoice = Cloud9::Invoice.find(params[:id])
+    end
 end

@@ -1,6 +1,6 @@
 %p#notice= notice
 
+%h3= "Invoice: #{@invoice.id}"
+%h3= "For: #{@invoice.customer.organization_name}"
 
-= link_to 'Edit', edit_cloud9_invoice_path(@cloud9_invoice)
-\|
-= link_to 'Back', cloud9_invoices_path
+= render 'core'

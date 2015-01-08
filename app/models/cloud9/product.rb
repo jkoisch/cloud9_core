@@ -72,6 +72,14 @@ class  Cloud9::Product < ActiveRecord::Base
     end
   end
 
+  def active_price=(val)
+    price = Cloud9::Price.create(
+        product_id: self.id,
+        amount: val
+    )
+    self.activate_price(price)
+  end
+
   # A simple view of the margin provided by this product
   def margin
     active_price - active_cost

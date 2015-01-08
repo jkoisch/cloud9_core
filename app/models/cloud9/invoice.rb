@@ -19,6 +19,9 @@
 # Through the orders, we can both manage the building of systems and bill customers for things.
 class Cloud9::Invoice < ActiveRecord::Base
 
+  attr_accessor :total
+  attr_reader :workflow_status
+
   has_many :orders
   has_many :invoice_groups, :class_name => "Cloud9::InvoiceGroup"
   has_many :invoice_lines, through: :invoice_groups, :class_name => "Cloud9::InvoiceLine"
@@ -44,7 +47,6 @@ class Cloud9::Invoice < ActiveRecord::Base
 
   def stage
     update_status(Cloud9::Invoice.status[:staged]) if self.workflow_state.nil?
-    self.total = 0 if self.total.nil?
   end
 
   def ready
@@ -52,7 +54,7 @@ class Cloud9::Invoice < ActiveRecord::Base
   end
 
   def sample
-    update_status(Cloud9::Invoice.status[:sample])
+    update_status(Cloud9::Invoice.status[:sampled])
   end
 
   def send_to_user

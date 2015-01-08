@@ -13,7 +13,7 @@ class ProductsController < ApplicationController
   end
 
   def update
-    respond_with product.update(product_params)
+    redirect_to edit_product_path(product) if product.update(product_params)
   end
 
   def destroy
@@ -32,8 +32,7 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:cloud9_product).permit(:name, :active, :description, :notes, :status, :invoice_name,
-                                    :invoice_description, :product_type_id, :required_quantity,:unit_price)
+    params.require(:cloud9_product).permit(:name, :active, :description, :notes, :status, :invoice_name,:invoice_description, :product_type_id, :required_quantity, :unit_price,:active_price)
   end
 
 end

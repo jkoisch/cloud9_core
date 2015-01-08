@@ -1,3 +1,4 @@
-%h3= "Simulated Invoice for #{@cloud9_customer.organization_name}"
+%h3= "Simulated Invoice for:"
+%h3= link_to @cloud9_customer.organization_name, customer_path(@cloud9_customer)
 
 = render 'invoices/core'

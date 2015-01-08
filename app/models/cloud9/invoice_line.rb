@@ -16,14 +16,6 @@ class Cloud9::InvoiceLine < ActiveRecord::Base
 
   belongs_to :invoice_group, :class_name => "Cloud9::InvoiceGroup"
 
-  def initialize(options = {})
-    super
-    @name = options[:name]
-    @description = options[:description]
-    @count = options[:count]
-    @line_total = options[:line_total]
-  end
-
   def self.create_from(comp)
     unless comp.blank?
       this_line = Cloud9::InvoiceLine.new(

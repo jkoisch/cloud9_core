@@ -13,7 +13,9 @@
 
 class Cloud9::InvoiceGroup < ActiveRecord::Base
 
-  attr_reader :description, :name, :total
+
+  attr_accessor :total
+  attr_reader :description, :name
 
   belongs_to :invoice, :class_name => "Cloud9::Invoice"
   has_many :invoice_lines, :class_name => "Cloud9::InvoiceLine"
@@ -23,6 +25,12 @@ class Cloud9::InvoiceGroup < ActiveRecord::Base
     self.total = 0
     self.name = options[:name]
     self.description = options[:description]
+  end
+
+  def total
+    val = 0
+    self.invoice_lines.each { |line| val += line[:line_total] unless line[:line_total].blank?}
+    val
   end
 
 end

@@ -28,7 +28,7 @@
             %tr
               %th= "Amt"
               %th= "Effective Date"
-            - @cloud9_product.prices.each do |p|
+            - @cloud9_product.prices.order("created_at DESC").each do |p|
               %tr
                 %td= "#{format_pennies(p.amount)}"
                 %td= "#{p.created_at.strftime '%c'}"
