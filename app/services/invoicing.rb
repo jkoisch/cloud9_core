@@ -15,7 +15,7 @@ class Invoicing
 
     @customer.systems.each do |sys|
       invoice.systems << sys
-      group = Cloud9::InvoiceGroup.new(:name => "Virtual Machine", :description => sys.virtual_machine_identifier)
+      group = Cloud9::InvoiceGroup.new(:name => "Virtual Machine", :description => sys.vm)
 
       group_total = 0
       sys.components.each do |comp|

@@ -20,6 +20,12 @@ class CustomersController < ApplicationController
     respond_with product.destroy
   end
 
+  def simulate_invoice
+    @cloud9_customer = customer
+    Invoicing.new(@cloud9_customer).call
+    @invoice = @cloud9_customer.invoices(true).last
+  end
+
   private
 
   def customer

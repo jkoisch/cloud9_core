@@ -54,8 +54,8 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
 
-  # namespace :api do
-  #   namespace :v1 do
+  namespace :api do
+    namespace :v1 do
   #     resources :products do
   #       resources :costs, shallow: true
   #       resources :prices, shallow: true
@@ -65,20 +65,20 @@ Rails.application.routes.draw do
   #     resources :prices
   #     resources :invoices
   #     resources :components
-  #     resources :systems do
-  #       collection do
-  #         post 'measurement'
-  #       end
-  #     end
+      resources :systems do
+        collection do
+          post 'measurement'
+        end
+      end
   #     resources :opportunities
   #     resources :customers do
   #       resources :components, shallow: true
   #       resources :measurements, shallow: true
   #       resources :invoices, shallow: true
   #     end
-  #
-  #   end
-  # end
+
+    end
+  end
 
   resources :salesforce do
     collection do
@@ -87,13 +87,18 @@ Rails.application.routes.draw do
   end
 
   resources :systems
-  resources :customers
+  resources :customers do
+    member do
+      get :simulate_invoice
+    end
+  end
   resources :products do
     member do
       get :costs
       get :prices
     end
   end
+  resources :invoices
   #root :to => 'dashboard#index'
   root to: 'home#index'
   # get '*path', to: 'home#index'

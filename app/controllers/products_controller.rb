@@ -20,6 +20,11 @@ class ProductsController < ApplicationController
     respond_with product.destroy
   end
 
+  def prices
+    @cloud9_product = product
+
+  end
+
   private
 
   def product
