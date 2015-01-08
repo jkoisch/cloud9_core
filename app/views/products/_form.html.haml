@@ -1,10 +1,50 @@
-= form_for @cloud9_product do |f|
+= form_for @cloud9_product, :url => product_path do |f|
   - if @cloud9_product.errors.any?
     #error_explanation
       %h2= "#{pluralize(@cloud9_product.errors.count, "error")} prohibited this cloud9_product from being saved:"
       %ul
         - @cloud9_product.errors.full_messages.each do |msg|
           %li= msg
+
+  %fieldset
+    %table
+      %tr
+        %td
+          %table.table-bordered.table-hover
+            %tr
+              %td= "Name:"
+              %td
+                =f.text_field :name, :required => true
+            %tr
+              %td= "Description:"
+              %td
+                =f.text_area :description, :required => true
+            %tr
+              %td= "Invoice Name:"
+              %td
+                =f.text_field :invoice_name
+            %tr
+              %td= "Invoice Description:"
+              %td
+                =f.text_area :invoice_description
+        %td
+          %table.table-bordered.table-hover
+            %tr
+              %td= "Type"
+              %td
+                = select_tag "cloud9_product[product_type_id]", options_for_select(Cloud9::ProductType.all.map { |prod| [prod.name.capitalize, prod.id] }, @cloud9_product.product_type_id)
+            %tr
+              %td= "Status"
+              %td
+                = select_tag "cloud9_product[status]", options_for_select(['new', 'production', 'staged', 'closed', 'bad'], @cloud9_product.status)
+            %tr
+              %td= "Active Price"
+              %td= link_to format_pennies(@cloud9_product.active_price), prices_product_path(@cloud9_product), :class => 'btn btn-mini'
+            %tr
+              %td= "Active Cost"
+              %td= link_to format_pennies(@cloud9_product.active_cost), costs_product_path(@cloud9_product), :class => 'btn btn-mini'
+
+
 
   .actions
     = f.submit 'Save'

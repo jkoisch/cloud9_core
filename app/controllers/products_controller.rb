@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
     @cloud9_products = Cloud9::Product.all
   end
 
-  def show
+  def edit
     @cloud9_product = product
   end
 
@@ -27,7 +27,7 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:name, :active, :description, :notes, :status, :invoice_name,
+    params.require(:cloud9_product).permit(:name, :active, :description, :notes, :status, :invoice_name,
                                     :invoice_description, :product_type_id, :required_quantity,:unit_price)
   end
 

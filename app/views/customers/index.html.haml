@@ -3,9 +3,11 @@
 %table.table-bordered.table-hover
   %thead
     %tr
-      %th
+      %th Customer
+      %th Last Invoice
       
   %tbody
     - @cloud9_customers.each do |cloud9_customer|
       %tr
         %td= link_to cloud9_customer.organization_name, customer_path(cloud9_customer)
+        %td TODO

@@ -14,3 +14,4 @@
         %td= link_to cloud9_system.vm, system_path(cloud9_system), :class => 'btn btn-mini'
         %td.centered
           = link_to cloud9_system.measurements.count.to_s, system_path(cloud9_system)
+        %td= cloud9_system.recent_update
