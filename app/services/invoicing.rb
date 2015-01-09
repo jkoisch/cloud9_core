@@ -62,5 +62,13 @@ class Invoicing
     invoice
   end
 
+  def create
+    invoice = self.call
+    invoice.send_to_user
+    invoice.save
+    invoice.delay.mail
+
+  end
+
 
 end

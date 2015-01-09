@@ -13,7 +13,7 @@ class ProductsController < ApplicationController
   end
 
   def update
-    redirect_to edit_product_path(product) if product.update(product_params)
+    redirect_to products_path if product.update(product_params)
   end
 
   def destroy

@@ -61,6 +61,7 @@ class Cloud9::Invoice < ActiveRecord::Base
   def send_to_user
     update_status(Cloud9::Invoice.status[:sent]) do
       self.bill_date = Time.now
+      self.external_id = UUIDTools::UUID.random_create.to_s
     end
   end
 
@@ -99,6 +100,10 @@ class Cloud9::Invoice < ActiveRecord::Base
       end
 
     end
+  end
+
+  def mail
+
   end
 
   private

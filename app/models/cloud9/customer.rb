@@ -124,4 +124,10 @@ class Cloud9::Customer < ActiveRecord::Base
     end
   end
 
+  def contact_list
+    addy = []
+    self.contacts.each { |con| addy << con.email }
+    addy
+  end
+
 end

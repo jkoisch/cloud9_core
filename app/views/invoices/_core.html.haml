@@ -10,8 +10,8 @@
 				-@invoice.invoice_groups.each do |grp|
 					%tr.info
 						%td= grp[:name]
-						%td= grp[:description].upcase
 						%td
+						%td= grp[:description].upcase
 						%td
 					%tr
 						%td
@@ -33,6 +33,6 @@
 						%td= format_pennies(grp.total)
 	%tr.error
 		%td= "TOTAL:"
-		%td
-		%td
 		%td= format_pennies(@invoice.total)
+		%td
+		%td
