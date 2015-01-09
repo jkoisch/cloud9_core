@@ -58,10 +58,14 @@ class Cloud9::Component < ActiveRecord::Base
   end
 
   def invoice_price
-    if self.quantity.present? && self.product.active_price.present?
-      self.unit_quantity * self.product.active_price
+    if self.system_id.present?
+      if self.quantity.present? && self.product.active_price.present?
+        self.unit_quantity * self.product.active_price
+      else
+        0
+      end
     else
-      0
+      self.product.active_price
     end
   end
 
