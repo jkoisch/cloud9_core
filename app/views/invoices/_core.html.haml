@@ -1,14 +1,14 @@
-%table
+%table.table.table-striped
 	%tr
 		%td
 			%table
-				%tr
+				%tr.success
 					%td= @invoice.customer.organization_name
 	%tr
 		%td
 			%table
 				-@invoice.invoice_groups.each do |grp|
-					%tr
+					%tr.info
 						%td= grp[:name]
 						%td= grp[:description].upcase
 						%td
@@ -20,17 +20,18 @@
 							%table
 								-grp.invoice_lines.each do |line|
 									%tr
-										%td= line[:name]
-										%td= "Count: #{line[:count]}"
+										%td= line[:name].capitalize
+										%td
+											= "Count: #{line[:count]}" if line[:count].present?
 										%td= line[:description]
 										%td
 										%td= format_pennies(line[:line_total])
-					%tr
+					%tr.success
 						%td= "Sub Total"
 						%td
 						%td
 						%td= format_pennies(grp.total)
-	%tr
+	%tr.error
 		%td= "TOTAL:"
 		%td
 		%td
