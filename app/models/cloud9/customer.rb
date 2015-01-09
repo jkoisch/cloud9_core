@@ -126,7 +126,7 @@ class Cloud9::Customer < ActiveRecord::Base
 
   def contact_list
     addy = []
-    self.contacts.each { |con| addy << con.email }
+    self.contacts.each { |con| addy << con.email unless con.email.blank? }
     addy
   end
 
