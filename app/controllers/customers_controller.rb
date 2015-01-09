@@ -12,8 +12,11 @@ class CustomersController < ApplicationController
     respond_with :api, :v1, Cloud9::Customer.create(customer_params)
   end
 
+  #The only information that we can update about the customer on this system is products purchased or owned
   def update
-    respond_with product.update(product_params)
+    @customer = customer
+    @customer.add_non_system_components(customer_params[:components])
+    redirect_to customer_path(@customer)
   end
 
   def destroy
@@ -26,6 +29,11 @@ class CustomersController < ApplicationController
     @invoice = sim.sample
   end
 
+  def component
+    @cloud9_customer = customer
+    @cloud9_products = Cloud9::Product.where("unit_price = false OR unit_price IS NULL")
+  end
+
   private
 
   def customer
@@ -33,6 +41,6 @@ class CustomersController < ApplicationController
   end
 
   def customer_params
-    params.require(:customer).permit(:first_name, :last_name, :organization_name, :email, :role, :id)
+    params.require(:cloud9_customer).permit(:first_name, :last_name, :organization_name, :email, :role, :id, :components => [])
   end
 end

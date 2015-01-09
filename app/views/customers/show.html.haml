@@ -9,7 +9,7 @@
         %td
             %strong= "Systems"
         %td
-            %strong= "Components"
+            %strong= "Products"
     %tr
         %td
             %table
@@ -31,7 +31,7 @@
                     %td
                         %ul
                         - @cloud9_customer.non_system_components.each do |comp|
-                            %li = "#{comp.product.name}"
+                            %li= "#{comp.product.name}"
     %tr
         %td
             %table
@@ -49,4 +49,5 @@
                         %td= format_pennies(inv.total)
                         %td= inv.workflow_state_to_s.capitalize
         %td= link_to "Simulate Invoice", simulate_invoice_customer_path(@cloud9_customer), :class => 'btn btn-small'
+        %td= link_to "Manage Software", component_customer_path(@cloud9_customer), :class => 'btn btn-small'
 

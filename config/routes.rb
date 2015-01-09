@@ -90,6 +90,7 @@ Rails.application.routes.draw do
   resources :customers do
     member do
       get :simulate_invoice
+      get :component
     end
   end
   resources :products do

@@ -102,8 +102,26 @@ class Cloud9::Customer < ActiveRecord::Base
     non
   end
 
+  def non_system_product_ids
+    non = []
+    self.non_system_components.each { |comp| non<<comp.product.id}
+    non
+  end
+
   def active_invoices
     self.invoices.where('workflow_state NOT IN (700,200)')
+  end
+
+  def add_non_system_components(product_ids)
+    #remove all non_system_components
+    non_system_components.each { |comp| comp.delete }
+
+    product_ids.each do |id|
+      Cloud9::Component.create(
+        product_id: id,
+        customer_id: self.id
+      )
+    end
   end
 
 end

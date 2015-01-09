@@ -13,6 +13,7 @@
 #  notes          :text
 #  error_date     :datetime
 #  workflow_state :integer
+#  sample         :boolean
 #
 
 #Cloud9 Invoices are just objects that have sub groups (groups and lines) and are tied to many orders for components.

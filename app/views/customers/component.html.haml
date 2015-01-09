@@ -1,0 +1,29 @@
+%p#notice= notice
+
+%h3= link_to @cloud9_customer.organization_name, customer_path(@cloud9_customer)
+
+
+= form_for @cloud9_customer, :url => customer_path do |f|
+  - if @cloud9_customer.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@cloud9_customer.errors.count, "error")} prohibited this Customer Information from being saved:"
+      %ul
+        - @cloud9_customer.errors.full_messages.each do |msg|
+          %li= msg
+
+  %table.table-bordered.table-hover
+    %tr
+      %th= "Type"
+      %th= "Product"
+      %th= "Include?"
+      %th
+        = f.submit "Save"
+    - prev_name = ''
+    - @cloud9_products.each do |cloud9_product|
+      %tr
+        %td= cloud9_product.product_type.name.capitalize.eql?(prev_name) ? '' : cloud9_product.product_type.name.capitalize
+        %td= link_to cloud9_product.invoice_name.capitalize, edit_product_path(cloud9_product)
+        - prev_name = cloud9_product.product_type.name.capitalize
+        %td
+          = check_box_tag "cloud9_customer[components][]",cloud9_product.id, @cloud9_customer.non_system_product_ids.include?(cloud9_product.id)
+        %td

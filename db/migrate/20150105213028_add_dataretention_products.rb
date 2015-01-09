@@ -6,8 +6,7 @@ class AddDataretentionProducts < ActiveRecord::Migration
         description: "Backups of essential data on VMs",
         product_type_id: 5,
         active: true,
-        invoice_description: "Rolling back-ups for 30 days",
-        unit_price: true
+        invoice_description: "Rolling back-ups for 30 days"
     )
 
     Cloud9::Price.create(
@@ -21,8 +20,7 @@ class AddDataretentionProducts < ActiveRecord::Migration
         description: "Backups of essential data on VMs",
         product_type_id: 5,
         active: true,
-        invoice_description: "Rolling back-ups for 30 days & Yearly on the 1st business day after back-up",
-        unit_price: true
+        invoice_description: "Rolling back-ups for 30 days & Yearly on the 1st business day after back-up"
     )
 
     Cloud9::Price.create(
@@ -36,8 +34,7 @@ class AddDataretentionProducts < ActiveRecord::Migration
         description: "Backups of essential data on VMs",
         product_type_id: 5,
         active: true,
-        invoice_description: "Rolling back-ups for 30 days & Quarterly back-up for 4 months",
-        unit_price: true
+        invoice_description: "Rolling back-ups for 30 days & Quarterly back-up for 4 months"
     )
 
     Cloud9::Price.create(
@@ -51,8 +48,7 @@ class AddDataretentionProducts < ActiveRecord::Migration
         description: "Backups of essential data on VMs",
         product_type_id: 5,
         active: true,
-        invoice_description: "Rolling back-ups for 30 days & Monthly back-up for 11 months",
-        unit_price: true
+        invoice_description: "Rolling back-ups for 30 days & Monthly back-up for 11 months"
     )
 
     Cloud9::Price.create(
@@ -66,8 +62,7 @@ class AddDataretentionProducts < ActiveRecord::Migration
         description: "Backups of essential data on VMs",
         product_type_id: 5,
         active: true,
-        invoice_description: "Rolling back-ups for 30 days & Weekly back-up for 48 weeks",
-        unit_price: true
+        invoice_description: "Rolling back-ups for 30 days & Weekly back-up for 48 weeks"
     )
 
     Cloud9::Price.create(

@@ -8,7 +8,6 @@
 #  system_id   :integer
 #  created_at  :datetime
 #  updated_at  :datetime
-#  active      :boolean
 #  quantity    :integer
 #  customer_id :integer
 #
@@ -47,7 +46,6 @@ class Cloud9::Component < ActiveRecord::Base
     self.system_id = options[:system_id]
     self.product_id = options[:product_id]
     self.customer_id = options[:customer_id]
-    self.active = options[:active]
     self.quantity = options[:quantity]
   end
 
