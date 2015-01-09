@@ -22,15 +22,8 @@ class Cloud9::InvoiceGroup < ActiveRecord::Base
 
   def initialize(options = {})
     super
-    self.total = 0
     self.name = options[:name]
     self.description = options[:description]
-  end
-
-  def total
-    val = 0
-    self.invoice_lines.each { |line| val += line[:line_total] unless line[:line_total].blank?}
-    val
   end
 
 end

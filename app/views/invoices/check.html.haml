@@ -1,0 +1,6 @@
+%p#notice= notice
+
+%h3= "Invoice: #{@invoice.id}"
+%h3= "For: #{@invoice.customer.organization_name}"
+
+= render 'core'

@@ -109,7 +109,7 @@ class Cloud9::Customer < ActiveRecord::Base
   end
 
   def active_invoices
-    self.invoices.where('workflow_state NOT IN (700,200)')
+    self.invoices.order("bill_date DESC").where('workflow_state NOT IN (700,200)')
   end
 
   def add_non_system_components(product_ids)

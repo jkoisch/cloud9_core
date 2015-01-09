@@ -30,9 +30,9 @@
 						%td= "Sub Total"
 						%td
 						%td
-						%td= format_pennies(grp.total)
+						%td= format_pennies(grp[:total])
 	%tr.error
 		%td= "TOTAL:"
-		%td= format_pennies(@invoice.total)
+		%td= format_pennies(@invoice[:total])
 		%td
 		%td

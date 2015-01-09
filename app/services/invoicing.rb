@@ -12,21 +12,23 @@ class Invoicing
   def call
     invoice = Cloud9::Invoice.new
     invoice.total = 0
+    total = 0
+    sub_total = 0
 
     @customer.systems.each do |sys|
       invoice.systems << sys
       group = Cloud9::InvoiceGroup.new(:name => "Virtual Machine", :description => sys.vm)
 
-      group_total = 0
+      sub_total = 0
       sys.components.each do |comp|
         line = Cloud9::InvoiceLine.create_from(comp)
         if line.present?
           group.invoice_lines << line
-          group_total += line.line_total.to_i
+          sub_total += line[:line_total].to_i
+          total += line[:line_total].to_i
         end
       end
-      group.total = group_total
-      invoice.total += group.total
+      group[:total] = sub_total
       invoice.invoice_groups << group
     end
 
@@ -34,22 +36,23 @@ class Invoicing
       invoice.components << comp
       group = Cloud9::InvoiceGroup.new(:name => "Other", :description => comp.product.invoice_name)
 
-      group_total = 0
+      sub_total = 0
       line = Cloud9::InvoiceLine.create_from(comp)
       if line.present?
         group.invoice_lines << line
-        group_total += line.line_total.to_i
+        sub_total += line[:line_total].to_i
+        total += line[:line_total].to_i
       end
 
       if group.invoice_lines.present?
-        group.total = group_total
+        group[:total] = sub_total
         invoice.invoice_groups << group
       end
 
-      invoice.total += group.total
     end
 
     invoice.ready
+    invoice[:total] = total
     @customer.invoices << invoice
     @customer.save
     invoice
@@ -66,8 +69,8 @@ class Invoicing
     invoice = self.call
     invoice.send_to_user
     invoice.save
-    invoice.delay.mail
-
+    # InvoiceMailer.bill(invoice)
+    InvoiceMailer.delay.bill(invoice)
   end
 
 

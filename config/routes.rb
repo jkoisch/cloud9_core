@@ -100,7 +100,11 @@ Rails.application.routes.draw do
       get :prices
     end
   end
-  resources :invoices
+  resources :invoices do
+    member do
+      get :check
+    end
+  end
   #root :to => 'dashboard#index'
   root to: 'home#index'
   # get '*path', to: 'home#index'

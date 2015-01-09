@@ -29,6 +29,14 @@ class CustomersController < ApplicationController
     @invoice = sim.sample
   end
 
+  def create_invoice
+    @cloud9_customer = customer
+    sim = Invoicing.new(@cloud9_customer)
+    @invoice = sim.create
+
+    redirect_to customer_path(@cloud9_customer)
+  end
+
   def component
     @cloud9_customer = customer
     @cloud9_products = Cloud9::Product.where("unit_price = false OR unit_price IS NULL")

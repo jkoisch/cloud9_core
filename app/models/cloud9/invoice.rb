@@ -14,11 +14,13 @@
 #  error_date     :datetime
 #  workflow_state :integer
 #  sample         :boolean
+#  external_id    :string(255)
 #
 
 #Cloud9 Invoices are just objects that have sub groups (groups and lines) and are tied to many orders for components.
 # Through the orders, we can both manage the building of systems and bill customers for things.
 class Cloud9::Invoice < ActiveRecord::Base
+  require 'uuidtools'
 
   attr_accessor :total
   attr_reader :workflow_status
@@ -100,10 +102,6 @@ class Cloud9::Invoice < ActiveRecord::Base
       end
 
     end
-  end
-
-  def mail
-
   end
 
   private
