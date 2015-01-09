@@ -1,6 +1,6 @@
 %p#notice= notice
 
-%h3= @cloud9_customer.organization_name
+%h3= "#{@cloud9_customer.organization_name} (#{@cloud9_customer.cloud9_identifier.upcase})"
 
 %table.table-bordered.table-hover
     %tr.success

@@ -16,7 +16,7 @@
         %tr
           %td
             - @cloud9_system.customer.systems.each do |sys|
-              =link_to sys.vm, system_path(sys), :class => 'btn btn-mini'
+              =link_to sys.vm, system_path(sys), :class => 'btn btn-mini' unless sys.id == @cloud9_system.id
     %td
       %table.table-hover
         - @cloud9_system.measurements.each do |mea|

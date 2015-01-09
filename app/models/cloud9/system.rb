@@ -53,7 +53,7 @@ class Cloud9::System < ActiveRecord::Base
   end
 
   def active_components
-    self.components.where(:active => true)
+    self.components
   end
 
   def recent_update
