@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150109021444) do
+ActiveRecord::Schema.define(version: 20150109200032) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,8 @@ ActiveRecord::Schema.define(version: 20150109021444) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "cloud9_identifier"
+    t.date     "billing_date"
+    t.string   "billing_frequency"
   end
 
   create_table "delayed_jobs", force: true do |t|

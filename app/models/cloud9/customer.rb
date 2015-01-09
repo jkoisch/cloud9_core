@@ -50,6 +50,8 @@ class Cloud9::Customer < ActiveRecord::Base
         salesforce_id: acct.salesforce_data.Id,
         salesforce_url: acct.salesforce_data.attributes.url
     )
+    self.billing_date = acct.salesforce_data.VS_Launch_Date__c
+    self.billing_frequency = acct.salesforce_data.Billing_Frequency__c
     self.salesforce_reference = ref
     self.organization_name = acct.salesforce_data.Name
     self.save!
