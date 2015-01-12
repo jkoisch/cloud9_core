@@ -21,7 +21,6 @@ module Customer
     end
 
     def call()
-
       @alarm = false
 
       unless @period < 1
@@ -30,6 +29,12 @@ module Customer
         @alarm = minutes_since_billing_date_base % minutes_per_period < MINUTES_IN_THRESHOLD
       end
       @alarm
+    end
+
+    def countdown
+      minutes_per_period = MINUTES_PER_DAY * @days_per_period
+      minutes_since_billing_date_base = (@target_date - @customer.billing_date_base).to_i * MINUTES_PER_DAY
+      ((minutes_per_period - (minutes_since_billing_date_base % minutes_per_period)) / MINUTES_PER_DAY).to_f
     end
   end
 end
