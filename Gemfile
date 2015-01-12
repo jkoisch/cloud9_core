@@ -19,6 +19,7 @@ gem 'figaro'
 gem 'active_model_serializers'
 gem 'delayed_job_active_record'
 gem 'uuidtools'
+gem 'authorizenet'
 
 gem 'rspec-rails', '~>3.0.0' ,:group => [:test, :development]
 group :test do

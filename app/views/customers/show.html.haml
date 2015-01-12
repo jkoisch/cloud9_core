@@ -56,6 +56,8 @@
                 %tr
                     %td= "Start: #{@cloud9_customer.billing_date_base.strftime '%x'}"
                 %tr
+                    %td= "Next: #{@timer} days"
+                %tr
                     %td= link_to "Simulate Invoice", simulate_invoice_customer_path(@cloud9_customer), :class => 'btn btn-small'
                 %tr
                     %td= link_to "Create Invoice", create_invoice_customer_path(@cloud9_customer), :class => 'btn btn-small'

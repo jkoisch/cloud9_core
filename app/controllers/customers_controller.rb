@@ -6,6 +6,8 @@ class CustomersController < ApplicationController
 
   def show
     @cloud9_customer = customer
+    timer = Customer::BillTimer.build(@cloud9_customer, DateTime.now)
+    @timer = timer.countdown
   end
 
   def create
