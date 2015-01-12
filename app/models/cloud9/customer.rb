@@ -7,6 +7,8 @@
 #  created_at        :datetime
 #  updated_at        :datetime
 #  cloud9_identifier :string(255)
+#  billing_frequency :string(255)
+#  billing_date_base :date
 #
 
 #A CLoud9::Customer is a first class object that has many systems, will manage contact and payment information, will
