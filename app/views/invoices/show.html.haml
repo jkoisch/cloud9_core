@@ -1,6 +1,12 @@
 %p#notice= notice
 
-%h3= "Invoice: #{@invoice.id}"
-%h3= "For: #{@invoice.customer.organization_name}"
+%h3= "Cloud9 Realtime Invoice: #{@invoice.id}"
+%h3= "Status: #{@invoice.workflow_state_to_s.capitalize}"
+%h4= "For: #{@invoice.customer.organization_name}"
+%h4= "External ID: #{@invoice.external_id}"
+
+%p
+  %a(href="javascript:window.print()" class="btn btn-small btn-info") Print
+  =link_to "Pay Invoice", pay_invoice_path(@invoice.external_id), :class => 'btn btn-small btn-success'
 
 = render 'core'

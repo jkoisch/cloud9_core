@@ -1,6 +1,8 @@
 %p#notice= notice
 
 %h3= "Invoice: #{@invoice.id}"
+%h3= "Status: #{@invoice.workflow_state_to_s.capitalize}"
 %h3= "For: #{@invoice.customer.organization_name}"
+%h3= "External ID: #{@invoice.external_id}"
 
 = render 'core'

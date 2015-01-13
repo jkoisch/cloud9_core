@@ -22,7 +22,7 @@
 class Cloud9::Invoice < ActiveRecord::Base
   require 'uuidtools'
 
-  attr_accessor :total
+  attr_accessor :total, :cc_number, :cc_expiration
   attr_reader :workflow_status
 
   has_many :orders
@@ -69,6 +69,7 @@ class Cloud9::Invoice < ActiveRecord::Base
 
   def pay(_notes = nil)
     update_status(Cloud9::Invoice.status[:paid]) do
+      self.archived = true
       addend_payment_reason(_notes)
       self.pay_date = Time.now
     end

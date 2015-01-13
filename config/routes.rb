@@ -103,6 +103,8 @@ Rails.application.routes.draw do
   resources :invoices do
     member do
       get :check
+      get :pay
+      patch :settle
     end
   end
   #root :to => 'dashboard#index'
