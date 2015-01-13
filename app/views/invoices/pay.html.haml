@@ -1,0 +1,23 @@
+%h4= "Cloud9 Realtime Invoice: #{@invoice.external_id}"
+
+= form_for @invoice, :url => settle_invoice_path(@invoice.external_id) do |f|
+  - if @invoice.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@invoice.errors.count, "error")} prohibited this cloud9_invoice from being saved:"
+      %ul
+        - @invoice.errors.full_messages.each do |msg|
+          %li= msg
+
+  - unless @invoice.workflow_state == Cloud9::Invoice.status[:paid]
+    %p
+      = f.label "Credit Card Number"
+      = f.text_field :cc_number, :value => "4111111111111111"
+    %p
+      = f.label "Expiration"
+      = f.text_field :cc_expiration, :value => "1120"
+
+
+    .actions
+      = f.submit 'Submit Credit Card Information', :class => 'btn btn-success'
+
+= render 'core'
