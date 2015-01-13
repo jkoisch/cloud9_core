@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Cloud9::System, :type => :model do
 
-  it "has a virual_machine_identifier" do
+  it "has a virtual_machine_identifier" do
     sys = build(:system)
     expect(sys.valid?).to eq(true)
     expect(sys.virtual_machine_identifier).to eq("system_1")
