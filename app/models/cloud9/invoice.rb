@@ -22,8 +22,7 @@
 class Cloud9::Invoice < ActiveRecord::Base
   require 'uuidtools'
 
-  attr_accessor :total, :cc_number, :cc_expiration
-  attr_reader :workflow_status
+  attr_accessor :cc_number, :cc_expiration
 
   has_many :orders
   has_many :invoice_groups, :class_name => "Cloud9::InvoiceGroup"
@@ -50,6 +49,7 @@ class Cloud9::Invoice < ActiveRecord::Base
 
   def stage
     update_status(Cloud9::Invoice.status[:staged]) if self.workflow_state.nil?
+    self.total = 0 if self.total.nil?
   end
 
   def ready
@@ -62,8 +62,8 @@ class Cloud9::Invoice < ActiveRecord::Base
 
   def send_to_user
     update_status(Cloud9::Invoice.status[:sent]) do
-      self.bill_date = Time.now
       self.external_id = UUIDTools::UUID.random_create.to_s
+      self.bill_date = Time.now
     end
   end
 

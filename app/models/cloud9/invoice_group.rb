@@ -13,10 +13,6 @@
 
 class Cloud9::InvoiceGroup < ActiveRecord::Base
 
-
-  attr_accessor :total
-  attr_reader :description, :name
-
   belongs_to :invoice, :class_name => "Cloud9::Invoice"
   has_many :invoice_lines, :class_name => "Cloud9::InvoiceLine"
 

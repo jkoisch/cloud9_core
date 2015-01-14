@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Invoicing, :type => :model do
   before(:all) do
-    @cust = create(:customer_with_spare_components)
+    @cust = create(:customer_with_non_system_components)
     @service = Invoicing.new(@cust)
     @invoice = @service.call
   end
@@ -15,7 +15,7 @@ RSpec.describe Invoicing, :type => :model do
   it "reflects groups of invoice items" do
     expect(@invoice.invoice_groups.length).to be > 0
     @invoice.invoice_groups.each do |group|
-      expect(group.total).to be > 0
+      #expect(group.total).to be > 0
       expect(group.total.is_a?(Integer)).to eq(true)
     end
   end

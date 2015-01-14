@@ -32,7 +32,7 @@ module Component
       #   end
       # end
       comp.quantity = qty
-      comp.save!
+      comp.save
     end
   end
 end

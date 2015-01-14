@@ -136,8 +136,14 @@ class  Cloud9::Product < ActiveRecord::Base
 
   private
   def self.unit_pricing(type, unit)
-    type = Cloud9::ProductType.select(:id).find_by(name: "#{type.downcase}")
-    prod = Cloud9::Product.find_or_create_by(:product_type_id => type.id, :active => true, :name => "#{unit.downcase} unit", :unit_price => true, :status => "production")
+    type = Cloud9::ProductType.find_or_create_by(name: "#{type.downcase}", description: "#{type.downcase}")
+    Cloud9::Product.find_or_create_by(
+        :product_type_id => type.id,
+        :active => true,
+        :name => "#{unit.downcase} unit",
+        :description => "#{unit.downcase} unit",
+        :unit_price => true,
+        :status => "production")
   end
 
   def self.map_to_component(key)

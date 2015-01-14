@@ -42,7 +42,7 @@ namespace :db do
 
     Cloud9::Product.take(5).each do |p|
       p.status = "production"
-      p.save!
+      p.save
     end
 
     #Build core product offerings

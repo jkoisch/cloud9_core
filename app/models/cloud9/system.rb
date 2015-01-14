@@ -32,18 +32,8 @@ class Cloud9::System < ActiveRecord::Base
 
   def defaults
 
-    if self.customer_id.blank?
-      cloud9CustomerProfile = Cloud9::Customer.find_by(organization_name: "Cloud9RealTime")
-      self.customer_id = cloud9CustomerProfile.id
-      self.save
-    end
-
     if self.components.blank?
-      ['ram', 'cpu', 'hd_boot'].each do |k|
-        id = eval("Cloud9::Product.#{k}_id")
-        self.components << Cloud9::Component.new(system_id: self.id, product_id: id, customer_id: self.customer_id)
-      end
-      self.save
+      create_basic_components
     end
 
   end
@@ -58,6 +48,14 @@ class Cloud9::System < ActiveRecord::Base
 
   def recent_update
     self.measurements.last.created_at.strftime '%c'
+  end
+
+  def create_basic_components
+    ['ram', 'cpu', 'hd_boot'].each do |k|
+      id = eval("Cloud9::Product.#{k}_id")
+      self.components << Cloud9::Component.create(system_id: self.id, product_id: id, customer_id: self.customer_id)
+    end
+    self.save!
   end
 
 

@@ -6,10 +6,10 @@ RSpec.configure do |config|
 
     #I HATE this. But I think this is necessary for now
     #todo .... get rid of this
-    load "#{Rails.root}/db/seeds.rb"
+    #load "#{Rails.root}/db/seeds.rb"
     begin
       DatabaseCleaner.start
-      FactoryGirl.lint
+      #FactoryGirl.lint
     ensure
       DatabaseCleaner.clean
     end

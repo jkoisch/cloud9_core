@@ -24,14 +24,14 @@ RSpec.describe Cloud9::Customer, :type => :model do
   end
 
   it "can have sets of components based on systems and standalone components" do
-    cust = create(:customer_with_spare_components)
-    expect(cust.components.count).to eq(20)
-    expect(cust.non_system_components.count).to eq(5)
+    @cust = create(:customer_with_non_system_components)
+    expect(@cust.components.count).to eq(20)
+    expect(@cust.non_system_components.count).to eq(5)
   end
 
   it "can have components" do
-    cust = create(:customer_with_spare_components)
-    expect(cust.non_system_components[0].is_a?(Cloud9::Component)).to be(true)
+    @cust = create(:customer_with_non_system_components)
+    expect(@cust.non_system_components[0].is_a?(Cloud9::Component)).to be(true)
   end
 
 

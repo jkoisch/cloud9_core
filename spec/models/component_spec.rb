@@ -8,13 +8,11 @@ RSpec.describe Cloud9::Component, :type => :model do
     prod = create(:product_with_required_quantity)
     comp = create(:component)
 
-    comp.quantity = 300
-    expect(comp.quantity).to eq(300)
-
-    comp.product_id = prod.id
+    expect(comp.valid?).to be(true)
+    expect(comp.quantity.nil?).to be(true)
+    comp.product = prod
+    comp.check_product_quantity
     comp.save
-
-    expect(comp.quantity).not_to eq(300)
     expect(comp.quantity).to eq(prod.required_quantity)
 
   end

@@ -16,6 +16,9 @@ class Invoicing
     sub_total = 0
 
     @customer.systems.each do |sys|
+
+      sys.components.each { |comp| puts "&*^%&^%&*^%&^%&*^%&*^% #{comp.inspect}"}
+
       invoice.systems << sys
       group = Cloud9::InvoiceGroup.new(:name => "Virtual Machine", :description => sys.vm)
 

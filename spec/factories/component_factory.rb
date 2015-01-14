@@ -1,8 +1,12 @@
 ns = Cloud9::Component
 
 FactoryGirl.define do
-  factory :component, :class => ns do
-    association :product, factory: :product_for_licensure
+  factory :non_system_component, :class => ns do
     customer
+    product
+
+    factory :component, :class => ns do
+      system
+    end
   end
 end

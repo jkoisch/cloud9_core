@@ -28,13 +28,14 @@ FactoryGirl.define do
           create_list(:system, evaluator.system_count, customer: customer)
         end
 
-        factory :customer_with_spare_components do
+        factory :customer_with_non_system_components do
+
           transient do
             component_count 5
           end
 
           after(:create) do |customer, evaluator|
-            create_list(:component, evaluator.component_count, customer: customer)
+            create_list(:non_system_component, evaluator.component_count, customer: customer)
           end
         end
 

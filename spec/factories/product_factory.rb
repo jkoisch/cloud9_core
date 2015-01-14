@@ -22,7 +22,7 @@ ns = Cloud9::Product
       description "product_1 description"
 
       transient do
-        count 5
+        count 2
       end
 
       after(:create) do |product, evaluator|
@@ -42,12 +42,14 @@ ns = Cloud9::Product
       product_type
       name "product_1"
       description "product_1 description"
-      required_quantity 500000000
+      required_quantity 500
     end
 
     factory :product_for_licensure, :class => ns do
       product_type
       name "software license"
       description "licensure description"
+      invoice_name "invoice software license"
+      invoice_description "invoice licensure description"
     end
   end
